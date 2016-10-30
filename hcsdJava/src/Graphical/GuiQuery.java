@@ -1,41 +1,37 @@
 package Graphical;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import Database.*;
+import Database.Database;
 
-
-
-public class QueryGUI extends JFrame {
-
+public class GuiQuery extends JFrame {
+	
 	private JPanel contentPane;
 	String[] query = { "First Name", "Surname"};
 	
 	
 	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+		//EventQueue.invokeLater(new Runnable() {
+			
 				try {
-					QueryGUI frame = new QueryGUI();
+					GuiQuery frame = new GuiQuery();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public QueryGUI() {
+		
+	
+	
+	
+	public GuiQuery() {
 		setTitle("Query");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 835, 634);
@@ -73,9 +69,9 @@ public class QueryGUI extends JFrame {
 					String typeQuery = queryList.getSelectedItem().toString();
 					String whatQuery = textArea.getText().toUpperCase();
 					if(typeQuery.equals("First Name")){
-						textArea_1.setText(data.selectPatient("*", "patient_table", "patient_first_name='"+ whatQuery +"'").toString());
+						textArea_1.setText(data.selectPatient("*", "patients", "first_name='"+ whatQuery +"'").toString());
 					}else{
-						textArea_1.setText(data.selectPatient("*", "patient_table", "patient_surname='"+ whatQuery +"'").toString());
+						textArea_1.setText(data.selectPatient("*", "patients", "last_name='"+ whatQuery +"'").toString());
 					}
 					
 					//textArea_1.setText(data.selectPatient("*", "patient_table").toString());
@@ -89,10 +85,15 @@ public class QueryGUI extends JFrame {
 			}
 		});
 		panel.add(searchButton);
-		System.out.println("DANS A DICK");
+
 
 		
 
 	}
 
 }
+	
+	
+	
+
+
