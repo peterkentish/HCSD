@@ -44,7 +44,11 @@ public class Patient {
 
 	public String toString() {
 		return String
-				.format("%s, %s ,%s, %s\n",patientID, firstName, surname, healthCare);
+				.format("%s, %s ,%s, %s \n",patientID, firstName, surname, healthCare);
+	}
+	public String toSQLString() {
+		return String
+				.format("'%s', '%s' ,'%s', '%s'",patientID, firstName, surname, healthCare);
 	}
 	
 }

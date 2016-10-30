@@ -27,7 +27,7 @@ public class Appointment {
 	}
 	public String toString() {
 		return String
-				.format("%s, %s ,%s\n",startTime, endTime, patient_id);
+				.format("%s, %s ,%s",startTime, endTime, patient_id);
 	}
 
 }
