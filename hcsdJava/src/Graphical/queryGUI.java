@@ -12,7 +12,7 @@ import Database.*;
 
 
 
-public class queryGUI extends JFrame {
+public class QueryGUI extends JFrame {
 
 	private JPanel contentPane;
 	String[] query = { "First Name", "Surname"};
@@ -23,7 +23,7 @@ public class queryGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					queryGUI frame = new queryGUI();
+					QueryGUI frame = new QueryGUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class queryGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public queryGUI() {
+	public QueryGUI() {
 		setTitle("Query");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 835, 634);
@@ -89,6 +89,7 @@ public class queryGUI extends JFrame {
 			}
 		});
 		panel.add(searchButton);
+		System.out.println("DANS A DICK");
 
 		
 

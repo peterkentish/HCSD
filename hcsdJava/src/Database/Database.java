@@ -34,12 +34,13 @@ public class Database{
 	}
 	public void addPatient(Patient patient){
 		selectQ = false;
-		query = "INSERT INTO patient_table VALUES ("+patient.toSQLString()+")";
+		query = "INSERT INTO patients VALUES ("+patient.toSQLString()+")";
+		System.out.println(query);
 		excQuery(query);
 	}
 	public void deletePatient(Patient patient){
 		selectQ = false;
-		query = "DELETE FROM patient_table WHERE patient_id="+patient.getPatientID();
+		query = "DELETE FROM patients WHERE patient_id="+patient.getPatientID();
 		excQuery(query);
 	}
   public Object excQuery(String query)
@@ -62,7 +63,7 @@ public class Database{
 	      
 	      while (rs.next())
 	      {
-	    	  if (table=="patient_table"){
+	    	  if (table=="patients"){
 	    		result = getPatientResults(rs);
 	    	  }else if (table=="appointments"){
 	    		  result = getAppointmentResults(rs);
@@ -79,18 +80,12 @@ public class Database{
     }
 	return result;
   }
-  public static void main(String args[]){
-	  Database db = new Database();
-	  db.addPatient(new Patient(2004, "Juno", "Late", "No"));
-	 System.out.println(db.selectPatient("*", "patient_table", "patient_first_name='Juno'"));
-	 db.deletePatient(new Patient(2004, "Juno", "Late", "No"));
-	 System.out.println(db.selectPatient("*", "patient_table", "patient_first_name='Juno'"));
-  }
+  
   public Patient getPatientResults(ResultSet r) throws SQLException{
 	    Patient allRes = new Patient(); 
 	    allRes.setPatientID(r.getInt("patient_id"));
 		allRes.setFirstName(r.getString("patient_first_name"));
-		allRes.setSurname(r.getString("patient_surname"));
+		allRes.setLastName(r.getString("patient_surname"));
 		allRes.setHealthCare(r.getString("healthcare_plan"));
 		return allRes;
   }

@@ -2,11 +2,11 @@ package Graphical;
 import Database.Database;
 import javax.swing.JFrame;
 
-public class runMain {
+public class RunMain {
 	static Database db = new Database();
 	public static void main(String[] args){
 		
-		mainMenu run = new mainMenu();
+		MainMenu run = new MainMenu();
 		run.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		run.setSize(1000,1000);
 		run.setVisible(true);
