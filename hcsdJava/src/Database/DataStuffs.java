@@ -77,6 +77,6 @@ public class DataStuffs {
 		connection();
 		DataStuffs data = new DataStuffs();
 		System.out.println(data.getAllPatients());
-		lkdndskfv
+		
 	}
 }
