@@ -80,7 +80,6 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		firstName = getFirstNameText();
-	
 	}
 	public String getTitleComboBox() {
 		return (String) titleComboBox.getSelectedItem();

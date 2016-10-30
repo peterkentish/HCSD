@@ -67,6 +67,7 @@ public class Patient {
 		this.contactNo = contactNo;
 	}
 	public String getHealthCare() {
+		System.out.println("ppooo");
 		return healthCare;
 	}
 	public void setHealthCare(String healthCare) {
