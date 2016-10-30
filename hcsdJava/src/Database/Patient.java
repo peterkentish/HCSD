@@ -3,52 +3,82 @@ package Database;
 public class Patient {
 	
 	private int patientID;
-	private String firstName;
-	private String surname;
-	private String healthCare;
+	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
 	
-	public int getPatientID() {
-		return patientID;
-	}
-
-	public void setPatientID(int patientID) {
-		this.patientID = patientID;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public void setHealthCare(String healthCare) {
-		this.healthCare = healthCare;
-	}
-
 	public Patient(){
 		
 	}
-	public Patient(int patientID, String firstName, String surname, String healthCare){
-		
-		this.patientID = patientID;
+	public Patient(String title, String firstName,String lastName,String birthDate,String streetAddress,String postcode, String contactNo){
+		this.title= title;
 		this.firstName = firstName;
-		this.surname = surname;
-		this.healthCare = healthCare;
+		this.lastName=lastName;
+		this.birthDate = birthDate;
+		this.streetAddress = streetAddress;
+		this.postcode = postcode;
+		this.contactNo = contactNo;
 	}
 
+	public int getPatientID() {
+		return patientID;
+	}
+	public void setPatientID(int patientID) {
+		this.patientID = patientID;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+	public String getHealthCare() {
+		return healthCare;
+	}
+	public void setHealthCare(String healthCare) {
+		this.healthCare = healthCare;
+	}
 	public String toString() {
 		return String
-				.format("%s, %s ,%s, %s \n",patientID, firstName, surname, healthCare);
+				.format("%s, %s ,%s, %s, %s, %s ,%s, %s \n",patientID,title, firstName,lastName, streetAddress,postcode,contactNo, healthCare);
 	}
 	public String toSQLString() {
 		return String
-				.format("'%s', '%s' ,'%s', '%s'",patientID, firstName, surname, healthCare);
+				.format("'%s', '%s' ,'%s', '%s', '%s', '%s' ,'%s', '%s' \n",patientID,title, firstName,lastName, streetAddress,postcode,contactNo, healthCare);
 	}
 	
 }
