@@ -15,6 +15,7 @@ import Database.*;
 public class queryGUI extends JFrame {
 
 	private JPanel contentPane;
+	String[] query = { "First Name", "Surname"};
 	
 	
 	
@@ -51,6 +52,10 @@ public class queryGUI extends JFrame {
 		queryLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(queryLabel);
 		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		JComboBox queryList = new JComboBox(query);
+		panel.add(queryList);
+		
 		JTextArea textArea = new JTextArea();
 		textArea.setColumns(20);
 		textArea.setTabSize(20);
@@ -63,6 +68,7 @@ public class queryGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Database data = new Database();
+					String whatQuery = queryList.getSelectedItem().toString();
 					
 					JTextArea textArea_1 = new JTextArea();
 					contentPane.add(textArea_1, BorderLayout.CENTER);
