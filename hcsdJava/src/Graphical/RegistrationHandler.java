@@ -22,7 +22,7 @@ public class RegistrationHandler implements ActionListener {
 		postcode = info.getPostcodeText();
 		contactNo = info.getContactNoText();
 		healthCare = info.getHealthcareComboBox();
-		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo));
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare));
 		
 	}
 

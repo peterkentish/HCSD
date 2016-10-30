@@ -94,7 +94,6 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		return lastNameText.getText();
 	}
 	public String getBirthDateText() {
-		System.out.println(birthDateText.getText());
 		return birthDateText.getText();
 	}
 	public String getStreetAddressText() {
