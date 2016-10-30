@@ -2,7 +2,7 @@ package Graphical;
 import java.awt.*;
 import javax.swing.*;
 
-public class mainMenu extends defaultFrame {
+public class MainMenu extends DefaultFrame {
 	private JLabel title;
 	private JLabel label1;
 	private JLabel label2;
@@ -11,9 +11,9 @@ public class mainMenu extends defaultFrame {
 	String[] titleList = { "Mr", "Mrs", "Miss", "Dr"};
 
 	
-	public mainMenu(){
+	public MainMenu(){
 		
-		defaultFrame();
+//		defaultFrame();
 		Container contentPane = getContentPane();
 		JPanel panel = new JPanel();
 		

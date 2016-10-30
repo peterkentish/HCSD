@@ -1,23 +1,24 @@
 package Graphical;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
 
 
-public class defaultFrame extends JFrame {
-	public void defaultFrame(){
-		//using flow layout
-				setLayout(new FlowLayout());
-				//setTitle("Welcome");
-				//background is light blue
-				getContentPane().setBackground(Color.cyan);
-				//using screen dimensions to set window size and location on screen
-				Toolkit toolkit = Toolkit.getDefaultToolkit();
-				Dimension screenDimention = toolkit.getScreenSize();
-				setLocation(new Point(screenDimention.width / 4, 10));
-				
-				
-		
+public class DefaultFrame extends JFrame {
+	public DefaultFrame(){
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		setBackground(Color.blue);
+		Dimension screenDimensions = toolkit.getScreenSize();
+		setSize(1200, 800);		
+		setLocation(new Point(50,0));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 	}
-
+		
 }
+
+
