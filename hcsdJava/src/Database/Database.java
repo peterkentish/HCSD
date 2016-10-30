@@ -35,6 +35,7 @@ public class Database{
 	public void addPatient(Patient patient){
 		selectQ = false;
 		query = "INSERT INTO patients VALUES ("+patient.toSQLString()+")";
+		System.out.println(query);
 		excQuery(query);
 	}
 	public void deletePatient(Patient patient){

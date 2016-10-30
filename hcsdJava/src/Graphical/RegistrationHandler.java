@@ -10,18 +10,18 @@ public class RegistrationHandler implements ActionListener {
 	private Database db = new Database();
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
 	private RegistrationInformationPanel info = new RegistrationInformationPanel();
-	public RegistrationHandler(String title, String firstName,String lastName,String birthDate,String steetAddress,String postcode, String contactNo, String healthCare,RegistrationInformationPanel inf){
-		this.title= title;
-		this.firstName = firstName;
-		this.lastName=lastName;
-		this.birthDate = birthDate;
-		this.streetAddress = streetAddress;
-		this.postcode = postcode;
-		this.contactNo = contactNo;
-		this.healthCare = healthCare;
+	public RegistrationHandler(RegistrationInformationPanel inf){
 		this.info = inf;
 	}
 	public void actionPerformed(ActionEvent e) {
+		title= info.getTitleComboBox();
+		firstName = info.getFirstNameText();
+		lastName=info.getLastNameText();
+		birthDate = info.getBirthDateText();
+		streetAddress = info.getStreetAddressText();
+		postcode = info.getPostcodeText();
+		contactNo = info.getContactNoText();
+		healthCare = info.getHealthcareComboBox();
 		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo));
 		
 	}

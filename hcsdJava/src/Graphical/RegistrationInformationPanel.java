@@ -16,9 +16,13 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	private JComboBox<String> healthcareComboBox = new JComboBox<String>();
 	private JTextField firstNameText,lastNameText,birthDateText,streetAddressText,postcodeText,contactNoText;
 	
-	private String firstName,lastName,birthDate, steetAddress,postcode,contactNo;
+	String firstName;
+	private String lastName;
+	private String birthDate;
+	private String steetAddress;
+	private String postcode;
+	private String contactNo;
 	public RegistrationInformationPanel(){
-
 		firstNameText= new JTextField(20);
 		lastNameText= new JTextField(20);
 		birthDateText= new JTextField(20);
@@ -75,8 +79,8 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		firstName = getFirstNameText();
+	
 	}
 	public String getTitleComboBox() {
 		return (String) titleComboBox.getSelectedItem();
@@ -91,6 +95,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		return lastNameText.getText();
 	}
 	public String getBirthDateText() {
+		System.out.println(birthDateText.getText());
 		return birthDateText.getText();
 	}
 	public String getStreetAddressText() {
@@ -102,4 +107,5 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	public String getContactNoText() {
 		return contactNoText.getText();
 	}
+
 }

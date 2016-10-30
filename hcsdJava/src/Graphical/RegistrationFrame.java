@@ -17,9 +17,8 @@ public class RegistrationFrame extends DefaultFrame {
 		contentPane.setLayout(new BorderLayout());
 		contentPane.add(info,BorderLayout.CENTER);
 		JButton submit = new JButton("ADD PATIENT");
-		submit.addActionListener(new RegistrationHandler(info.getTitleComboBox(),
-				info.getFirstNameText(), info.getLastNameText(), info.getBirthDateText(), info.getStreetAddressText(),
-				info.getPostcodeText(), info.getContactNoText(), info.getHealthcareComboBox(), info));
+		
+		submit.addActionListener(new RegistrationHandler(info));
 		submit.setMaximumSize(new Dimension(200,40));
 		contentPane.add(submit,BorderLayout.SOUTH);
 		
