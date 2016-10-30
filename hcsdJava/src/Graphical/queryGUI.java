@@ -68,11 +68,17 @@ public class queryGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Database data = new Database();
-					String whatQuery = queryList.getSelectedItem().toString();
-					
 					JTextArea textArea_1 = new JTextArea();
 					contentPane.add(textArea_1, BorderLayout.CENTER);
-					textArea_1.setText(data.selectPatient("*", "patient_table").toString());
+					String typeQuery = queryList.getSelectedItem().toString();
+					String whatQuery = textArea.getText().toUpperCase();
+					if(typeQuery.equals("First Name")){
+						textArea_1.setText(data.selectPatient("*", "patient_table", "patient_first_name='"+ whatQuery +"'").toString());
+					}else{
+						textArea_1.setText(data.selectPatient("*", "patient_table", "patient_surname='"+ whatQuery +"'").toString());
+					}
+					
+					//textArea_1.setText(data.selectPatient("*", "patient_table").toString());
 					
 
 					
