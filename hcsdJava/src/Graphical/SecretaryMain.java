@@ -2,6 +2,7 @@ package Graphical;
 
 import java.awt.Container;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -15,6 +16,7 @@ public class SecretaryMain extends DefaultFrame{
 		CalendarPanel dentistCal = new CalendarPanel();
 		CalendarPanel hygieneCal = new CalendarPanel();
 		RegistrationInformationPanel regPan = new RegistrationInformationPanel();
+		
 		BookingAppointmentPanel bookPan = new BookingAppointmentPanel();
 //		JTabbedPane tabs = new JTabbedPane();
 //		tabs.addTab("Diary", cal);

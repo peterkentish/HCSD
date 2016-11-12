@@ -1,27 +1,32 @@
 package Graphical;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Database.Database;
+import Database.Patient;
 
 public class RegistrationInformationPanel extends JPanel implements ActionListener {
 	private JComboBox<String> titleComboBox = new JComboBox<String>();
 	private JComboBox<String> healthcareComboBox = new JComboBox<String>();
 	private JTextField firstNameText,lastNameText,birthDateText,streetAddressText,postcodeText,contactNoText;
 	
+	String title;
 	String firstName;
 	private String lastName;
 	private String birthDate;
-	private String steetAddress;
+	private String streetAddress;
 	private String postcode;
 	private String contactNo;
+	private String healthCare;
 	public RegistrationInformationPanel(){
 		firstNameText= new JTextField(20);
 		lastNameText= new JTextField(20);
@@ -75,11 +80,24 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		this.add(contactNoText);
 		this.add(healthcareLabel);
 		this.add(healthcareComboBox);
+		JButton submit = new JButton("ADD PATIENT");
+		this.add(submit);
+		submit.addActionListener(this);
+		submit.setMaximumSize(new Dimension(200,40));
 		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		firstName = getFirstNameText();
+		Database db = new Database();
+		title= this.getTitleComboBox();
+		firstName = this.getFirstNameText();
+		lastName=this.getLastNameText();
+		birthDate = this.getBirthDateText();
+		streetAddress = this.getStreetAddressText();
+		postcode = this.getPostcodeText();
+		contactNo = this.getContactNoText();
+		healthCare = this.getHealthcareComboBox();
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare));
 	}
 	public String getTitleComboBox() {
 		return (String) titleComboBox.getSelectedItem();
