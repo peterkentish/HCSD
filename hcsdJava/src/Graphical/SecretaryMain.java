@@ -15,6 +15,7 @@ public class SecretaryMain extends DefaultFrame{
 		CalendarPanel dentistCal = new CalendarPanel();
 		CalendarPanel hygieneCal = new CalendarPanel();
 		RegistrationInformationPanel regPan = new RegistrationInformationPanel();
+		BookingAppointmentPanel bookPan = new BookingAppointmentPanel();
 //		JTabbedPane tabs = new JTabbedPane();
 //		tabs.addTab("Diary", cal);
 //		//Add everything to the frame space
@@ -30,6 +31,8 @@ public class SecretaryMain extends DefaultFrame{
 	      jtp.addTab("Dentist Week Schedule", dentistCal);
 	      jtp.addTab("Hygiene Week Schedule", hygieneCal);
           jtp.addTab("Register a new Patient", regPan);
+          jtp.addTab("Book another Appointment", bookPan);
+          
 		
 	}
 	public static void main(String[] args) {

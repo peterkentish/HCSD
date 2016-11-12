@@ -27,7 +27,6 @@ public class Database{
 		return (Appointment) excQuery(query);
 	}
 	public Object selectAppointment(String item, String table,String param){
-		
 		query = "SELECT "+item+" FROM "+table+" WHERE "+param;
 		this.table = table;
 		return excQuery(query);

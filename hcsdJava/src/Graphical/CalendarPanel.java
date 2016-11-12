@@ -76,7 +76,7 @@ public class CalendarPanel extends JPanel {
 		}
 		for (int i=0;i<times.size();i++){
 			g.drawString(timesString.get(i), 40, 70+23*i);
-			g.drawLine(40,72+23*i,this.getWidth(),72+23*i);
+			g.drawLine(40,74+23*i,this.getWidth(),74+23*i);
 		}
 		
 	}
