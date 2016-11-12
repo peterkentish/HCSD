@@ -1,50 +1,65 @@
 package Graphical;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import java.sql.*;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import Database.Database;
+import Database.Patient;
+
 public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	ArrayList<String> timesString = new ArrayList<String>();
 	List<java.sql.Time> times = new ArrayList<>();
-	private JTextField firstNameText,lastNameText,birthDateText;
-	
+	private JTextField firstNameText,lastNameText,birthDateText,postcodeText;
+	JComboBox<java.sql.Time> timesComboBox = new JComboBox<>();
 	String firstName;
 	private String lastName;
 	private String birthDate;
 	private String staffMember;
+	private String postcode;
 	private Time appointmentStart,appointmentEnd;
+	private Integer patientID =0; 
+	private JLabel idLabel = new JLabel(patientID.toString());
 	
 	public BookingAppointmentPanel(){
 		populateTimesOfDay();
 		firstNameText= new JTextField(20);
 		lastNameText= new JTextField(20);
 		birthDateText= new JTextField(20);
+		postcodeText = new JTextField(20);
 		
-		
+		for (int i=0;i<times.size();i++){
+			timesComboBox.addItem(times.get(i));
+		}
+
 		Dimension textDim = new Dimension(600,40); 
 		firstNameText.setMaximumSize(textDim);
 		lastNameText.setMaximumSize(textDim);
 		birthDateText.setMaximumSize(textDim);
-
+		postcodeText.setMaximumSize(textDim);
+		timesComboBox.setMaximumSize(textDim);
 		
 		this.setLayout(new BoxLayout(this,1));
 		JLabel firstNameLabel = new JLabel("First Name: ");
 		JLabel lastNameLabel = new JLabel("Surname: ");
 		JLabel birthDateLabel = new JLabel("Date of Birth: ");
-
+		JLabel postcodeLabel = new JLabel("Postcode: ");
+		idLabel = new JLabel(patientID.toString());
+		idLabel.setVisible(false);
+		idLabel.setFont(new Font("Arial",0,25));
 	
 		this.add(firstNameLabel);
 		this.add(firstNameText);
@@ -52,6 +67,16 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		this.add(lastNameText);
 		this.add(birthDateLabel);
 		this.add(birthDateText);
+		this.add(postcodeLabel);
+		this.add(postcodeText);
+		JButton submit = new JButton("GET PATIENT ID");
+		this.add(submit);
+		submit.addActionListener(this);
+		submit.setMaximumSize(new Dimension(200,40));
+		this.add(idLabel);
+		
+		this.add(timesComboBox);
+		
 
 
 	}
@@ -73,7 +98,12 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		firstName = getFirstNameText();
+		Database db = new Database();
+		Patient pat = (Patient) db.selectPatient("*", "patients", "first_name='"+getFirstNameText()+"' and last_name='"+getLastNameText()+"' and birth_date='"
+				+getBirthDateText()+"' and postcode ='"+getPostcodeText()+"'");
+		idLabel.setText(pat.getPatientID()+"");
+		idLabel.setVisible(true);
+		
 	}
 	
 	public String getFirstNameText() {
@@ -84,6 +114,9 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	}
 	public String getBirthDateText() {
 		return birthDateText.getText();
+	}
+	public String getPostcodeText() {
+		return postcodeText.getText();
 	}
 	
 }

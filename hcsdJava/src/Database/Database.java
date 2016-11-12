@@ -18,6 +18,7 @@ public class Database{
 	public Object selectPatient(String item, String table,String param){
 		selectQ = true;
 		query = "SELECT "+item+" FROM "+table+" WHERE "+param;
+		System.out.println(query);
 		this.table = table;
 		return excQuery(query);
 	}
@@ -83,9 +84,13 @@ public class Database{
   public Patient getPatientResults(ResultSet r) throws SQLException{
 	    Patient allRes = new Patient(); 
 	    allRes.setPatientID(r.getInt("patient_id"));
-		allRes.setFirstName(r.getString("patient_first_name"));
-		allRes.setLastName(r.getString("patient_surname"));
-		allRes.setHealthCare(r.getString("healthcare_plan"));
+		allRes.setFirstName(r.getString("first_name"));
+		allRes.setLastName(r.getString("last_name"));
+		allRes.setBirthDate(r.getString("birth_date"));
+		allRes.setStreetAddress(r.getString("street_address"));
+		allRes.setPostcode(r.getString("postcode"));
+		allRes.setContactNo(r.getString("contact_no"));
+		allRes.setHealthCare(r.getString("healthcare"));
 		return allRes;
   }
   public Appointment getAppointmentResults(ResultSet r) throws SQLException{
