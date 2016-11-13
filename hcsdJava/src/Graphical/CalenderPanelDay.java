@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -21,6 +22,11 @@ public class CalenderPanelDay extends JPanel{
 	List<java.sql.Time> times = new ArrayList<>();
 	ArrayList<String> timesString = new ArrayList<String>();
 	Date weekStart;
+	Date panelDate = new Date();
+	
+    
+    
+    
 	
 	public void getStartOfWeek(){
 		Calendar c = Calendar.getInstance();
@@ -57,10 +63,9 @@ public class CalenderPanelDay extends JPanel{
 		dayOfWeek[6]="Sunday";
 	}
 	public CalenderPanelDay(){
-		setBackground(Color.WHITE);	
+			
 		populateTimesOfDay();
-		populateDaysOfWeek();
-		getStartOfWeek();
+
 	}
 	public void paintComponent(Graphics graphics){
 		super.paintComponents(graphics);
@@ -69,11 +74,11 @@ public class CalenderPanelDay extends JPanel{
 		Font titleFont = new Font("Century Gothic", 0, 28);
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = new Date();
-		dateFormat.format(date); 
+		panelDate = new Date();
+		dateFormat.format(panelDate); 
 		
 		g.setFont(titleFont);
-		g.drawString("Day View  "+dateFormat.format(date).toString(), 400, 25);
+		g.drawString("Day View  "+dateFormat.format(panelDate).toString(), 400, 25);
 		
 		
 		g.setFont(mainFont);
@@ -83,17 +88,18 @@ public class CalenderPanelDay extends JPanel{
 			g.drawLine(40,74+23*i,this.getWidth(),74+23*i);
 		}
 	
+
 	
 }
 	
-	public static void main(String[] args){
-		JFrame x = new DefaultFrame();
-		Container c = x.getContentPane();
-		c.setBackground(Color.WHITE); 
-		CalenderPanelDay cpd = new CalenderPanelDay();
-		c.add(cpd);
-		x.setVisible(true);
-	}
+//	public static void main(String[] args){
+//		JFrame x = new DefaultFrame();
+//		Container c = x.getContentPane();
+//		c.setBackground(Color.WHITE); 
+//		CalenderPanelDay cpd = new CalenderPanelDay();
+//		c.add(cpd);
+//		x.setVisible(true);
+//	}
 
 
 }
