@@ -11,8 +11,6 @@ public class DayPanelHandler implements ActionListener  {
 	public DayPanelHandler(CalenderPanelDay cal) {
 		this.cal = cal;
 		this.day = cal.panelDate;
-		
-		
 	}
 	
 	@Override
@@ -23,10 +21,9 @@ public class DayPanelHandler implements ActionListener  {
 		Date nextDay = calendar.getTime();
 		System.out.println(nextDay);
 		day = nextDay;
-		cal.removeAll();
+		cal.setPanelDate(day);
 		cal.repaint();
-		
-		
+
 		
 	}
 

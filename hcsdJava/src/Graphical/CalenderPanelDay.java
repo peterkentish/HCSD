@@ -28,6 +28,14 @@ public class CalenderPanelDay extends JPanel{
     
     
 	
+	public Date getPanelDate() {
+		return panelDate;
+	}
+
+	public void setPanelDate(Date panelDate) {
+		this.panelDate = panelDate;
+	}
+
 	public void getStartOfWeek(){
 		Calendar c = Calendar.getInstance();
 		c.setFirstDayOfWeek(Calendar.MONDAY);
@@ -68,13 +76,14 @@ public class CalenderPanelDay extends JPanel{
 
 	}
 	public void paintComponent(Graphics graphics){
+		System.out.println("Panel d"+panelDate);
 		super.paintComponents(graphics);
 		Graphics2D g = (Graphics2D) graphics;
 		Font mainFont = new Font("Century Gothic", 0, 20);
 		Font titleFont = new Font("Century Gothic", 0, 28);
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		panelDate = new Date();
+
 		dateFormat.format(panelDate); 
 		
 		g.setFont(titleFont);
@@ -92,14 +101,7 @@ public class CalenderPanelDay extends JPanel{
 	
 }
 	
-//	public static void main(String[] args){
-//		JFrame x = new DefaultFrame();
-//		Container c = x.getContentPane();
-//		c.setBackground(Color.WHITE); 
-//		CalenderPanelDay cpd = new CalenderPanelDay();
-//		c.add(cpd);
-//		x.setVisible(true);
-//	}
+
 
 
 }
