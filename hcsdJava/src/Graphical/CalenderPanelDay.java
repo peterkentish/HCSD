@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,6 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Database.Appointment;
+import Database.Database;
+
 public class CalenderPanelDay extends JPanel{
 	
 	String[] dayOfWeek = new String[7];
@@ -23,6 +27,7 @@ public class CalenderPanelDay extends JPanel{
 	ArrayList<String> timesString = new ArrayList<String>();
 	Date weekStart;
 	Date panelDate = new Date();
+	Database db = new Database();
 	
     
     
@@ -75,6 +80,37 @@ public class CalenderPanelDay extends JPanel{
 		populateTimesOfDay();
 
 	}
+	
+	
+	public String sqlFormatterToday(Date d){
+		String x = "'"+(d.getYear()+1900)+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":00' ";
+		return x;
+	}
+	  public Date stringToDate(String s){
+		  	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String startDateString = s;
+		    String newDateString= "";
+		    Date newerDate= null;
+		    try{
+		        Calendar c = Calendar.getInstance();
+		        c.setTime(sdf.parse(startDateString));
+		        c.add(Calendar.DATE, 7);  // number of days to add
+		        newDateString = sdf.format(c.getTime());
+		        newerDate = c.getTime();
+		    } catch (ParseException e) {
+		        e.printStackTrace();
+		    }
+		    return newerDate;
+	  }
+	  
+	  public String getHoursMins(Date d){
+		 Integer h = d.getHours();
+		 Integer m = d.getMinutes();
+		 String x = h+":"+m;
+		 return x;
+		  
+	  }
+	  
 	public void paintComponent(Graphics graphics){
 		System.out.println("Panel d"+panelDate);
 		super.paintComponents(graphics);
@@ -82,20 +118,40 @@ public class CalenderPanelDay extends JPanel{
 		Font mainFont = new Font("Century Gothic", 0, 20);
 		Font titleFont = new Font("Century Gothic", 0, 28);
 		
+		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 		dateFormat.format(panelDate); 
+		
+		ArrayList<Date> appTimes = new ArrayList<Date>();
+		ArrayList<Appointment> apps =(ArrayList<Appointment>) db.getAppointmentsDay(panelDate, "dentist_appointments");
 		
 		g.setFont(titleFont);
 		g.drawString("Day View  "+dateFormat.format(panelDate).toString(), 400, 25);
 		
 		
 		g.setFont(mainFont);
+		
+		for (int i=0;i<apps.size();i++){
+			appTimes.add(stringToDate(apps.get(i).getStartTime()));
+			appTimes.add(stringToDate(apps.get(i).getEndTime()));
+		}
 
 		for (int i=0;i<times.size();i++){
+			int yValue = 70+23*i;
 			g.drawString(timesString.get(i), 40, 70+23*i);
-			g.drawLine(40,74+23*i,this.getWidth(),74+23*i);
+			g.drawLine(40,yValue,this.getWidth(),yValue);
+			
+			for (int j = 0; j<appTimes.size();j=j+2){
+				System.out.println("---"+getHoursMins(times.get(i)));
+				System.out.println("___"+getHoursMins(appTimes.get(j)));
+				if (getHoursMins(times.get(i)).equals(getHoursMins(appTimes.get(j)))){
+					g.drawString("APPOINTMENT",140, yValue);
+				}
+			}
 		}
+		
+		
 	
 
 	

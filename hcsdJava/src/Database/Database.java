@@ -30,6 +30,14 @@ public class Database{
 		System.out.println(query);
 		return excQuery(query);
 	}
+	
+	public Object getAppointmentsDay(Date day, String table){
+		selectQ= true;
+		query = "SELECT * FROM "+table+" WHERE appointment_start  "+sqlFormatter(day);
+		this.table = table;
+		System.out.println(query);
+		return excQuery(query);
+	}
 	public Object selectPatient(String item, String table,String param){
 		selectQ = true;
 		query = "SELECT "+item+" FROM "+table+" WHERE "+param;
