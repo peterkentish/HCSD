@@ -30,7 +30,6 @@ public class SecretaryMain extends DefaultFrame{
           jtp.addTab("Register a new Patient", regPan);
           jtp.addTab("Book another Appointment", bookPan);
           
-		
 	}
 	public static void main(String[] args) {
 		JFrame x = new SecretaryMain();

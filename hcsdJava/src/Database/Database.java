@@ -136,7 +136,6 @@ public class Database{
 }
   public String dateFormatter(Date weekCommencing){
 	  	Date newDate = new Date(weekCommencing.getYear(), weekCommencing.getMonth(), weekCommencing.getDate(),weekCommencing.getHours(),weekCommencing.getMinutes());
-	  	System.out.println(newDate.toString());
 	  	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 	    String startDateString = newDate.toString();
 	    String newDateString= "";

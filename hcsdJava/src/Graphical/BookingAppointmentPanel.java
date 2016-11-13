@@ -69,12 +69,12 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 			String x = Integer.toString(i);
 			Date dt = new Date(currentYear, currentMonth, i);
 			int day = dt.getDay();
-
+			
 			String dayName;
-			switch (day){
-				case 0: dayName = " Sunday";break;
+			switch (day+1){
+				case 7: dayName = " Sunday";break;
 				case 1: dayName = " Monday";break;
-				case 2: dayName = " Tueday";break;
+				case 2: dayName = " Tuesday";break;
 				case 3: dayName = " Wednesday";break;
 				case 4: dayName = " Thursday";break;
 				case 5: dayName = " Friday";break;
@@ -221,7 +221,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 				switch (day){
 					case 0: dayName = " Sunday";break;
 					case 1: dayName = " Monday";break;
-					case 2: dayName = " Tueday";break;
+					case 2: dayName = " Tuesday";break;
 					case 3: dayName = " Wednesday";break;
 					case 4: dayName = " Thursday";break;
 					case 5: dayName = " Friday";break;

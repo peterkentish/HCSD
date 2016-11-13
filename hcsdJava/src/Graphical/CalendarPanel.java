@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,12 +16,13 @@ import javax.swing.JPanel;
 
 import Database.Appointment;
 import Database.Database;
+import Database.Patient;
 
 public class CalendarPanel extends JPanel {
 	
 	
 	
-	String[] dayOfWeek = new String[7];
+	String[] dayOfWeek = new String[5];
 	List<java.sql.Time> times = new ArrayList<>();
 	ArrayList<String> timesString = new ArrayList<String>();
 	Date weekStart;
@@ -56,8 +58,6 @@ public class CalendarPanel extends JPanel {
 		dayOfWeek[2]="Wednesday";
 		dayOfWeek[3]="Thursday";
 		dayOfWeek[4]="Friday";
-		dayOfWeek[5]="Saturday";
-		dayOfWeek[6]="Sunday";
 	}
 	public CalendarPanel(){
 		setBackground(Color.WHITE);	
@@ -75,30 +75,42 @@ public class CalendarPanel extends JPanel {
 		g.drawString("Week Commencing "+weekStart.toString().substring(4, 10), 400, 25);
 		ArrayList<Appointment> apps =(ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, "dentist_appointments");
 		ArrayList<Date> appTimes = new ArrayList<Date>();
+		ArrayList<Patient> patients = new ArrayList<Patient>();
+		
 		g.setFont(mainFont);
-		for (int i=0;i<apps.size();i++){
-			appTimes.add(stringToDate(apps.get(i).getStartTime()));
-			appTimes.add(stringToDate(apps.get(i).getEndTime()));
+		AffineTransform gSave = g.getTransform();
+		g.rotate(-Math.PI/2);
+		g.drawString("Appointment Start", -400, 30);
+		g.setTransform(gSave);
+		for (Appointment a : apps){
+			System.out.println(a.getStartTime());
+			appTimes.add(stringToDate(a.getStartTime()));
+			appTimes.add(stringToDate(a.getEndTime()));
+			Date s = a.stringToDate(a.getStartTime());
+			patients.add((Patient) db.selectPatient("*", "patients", "patient_id="+a.getPatient_id()));
 		}
+		
 		for (int i=0;i<dayOfWeek.length;i++){
-			int xValue = 135+150*i;
-			g.drawString(dayOfWeek[i], 160+150*i, 50);
+			int xValue = 135+210*i;
+			g.drawString(dayOfWeek[i], 190+210*i, 50);
 			g.drawLine(xValue, 50, xValue, this.getHeight());
-			
 		}
 		
-		
+
 		for (int i=0;i<times.size();i++){
 			int yValue = 70+23*i;
 			g.drawString(timesString.get(i), 40, 70+23*i);
 			g.drawLine(40,yValue,this.getWidth(),yValue);
-			
 			for (int j = 0; j<appTimes.size();j=j+2){
-				System.out.println("---"+getHoursMins(times.get(i)));
-				System.out.println("___"+getHoursMins(appTimes.get(j)));
 				if (getHoursMins(times.get(i)).equals(getHoursMins(appTimes.get(j)))){
-					g.drawString("APPOINTMENT",140, yValue);
+					int apptLength= getDifference(appTimes.get(j), appTimes.get(j+1))/20;
+					for (int z=0;z<apptLength;z++){
+						System.out.println(z);
+						g.drawString(patients.get(j/2).getFirstName(),140+appTimes.get(j).getDay()*210,yValue+z*23);
+					}
 				}
+				
+				
 			}
 		}
 
@@ -131,4 +143,17 @@ public class CalendarPanel extends JPanel {
 		 return x;
 		  
 	  }
+	  public int getDifference(Date date1, Date date2) {
+		    int numHours1 =date1.getHours();
+		    int numMinutes1 = date1.getMinutes();
+		    int total1 = numHours1*60+numMinutes1;
+		    
+		    int numHours2 = date2.getHours();
+		    int numMinutes2 = date2.getMinutes();
+		    int total2 =numHours2*60 +numMinutes2;
+		    
+		    int total = total2 - total1;
+		
+		    return total;
+		}
 }
