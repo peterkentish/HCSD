@@ -26,7 +26,8 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	ArrayList<String> timesString = new ArrayList<String>();
 	List<java.sql.Time> times = new ArrayList<>();
 	private JTextField firstNameText,lastNameText,birthDateText,postcodeText;
-	JComboBox<String> timesComboBox = new JComboBox<>();
+	JComboBox<String> startTimesComboBox = new JComboBox<>();
+	JComboBox<String> endTimesComboBox = new JComboBox<>();
 	JComboBox<String> staffMember = new JComboBox<>();
 	String firstName;
 	private String lastName;
@@ -68,7 +69,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 			String x = Integer.toString(i);
 			Date dt = new Date(currentYear, currentMonth, i);
 			int day = dt.getDay();
-			System.out.println(day);
+
 			String dayName;
 			switch (day){
 				case 0: dayName = " Sunday";break;
@@ -90,7 +91,8 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		
 		
 		for (int i=0;i<times.size();i++){
-			timesComboBox.addItem(timesString.get(i));
+			startTimesComboBox.addItem(timesString.get(i));
+			endTimesComboBox.addItem(timesString.get(i));
 		}
 		Date todaysDate = new Date();
 		int yearToday = todaysDate.getYear()+1900;
@@ -110,7 +112,8 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		lastNameText.setMaximumSize(textDim);
 		birthDateText.setMaximumSize(textDim);
 		postcodeText.setMaximumSize(textDim);
-		timesComboBox.setMaximumSize(new Dimension(200,30));
+		startTimesComboBox.setMaximumSize(new Dimension(200,30));
+		endTimesComboBox.setMaximumSize(new Dimension(200,30));
 		
 		staffMember.setMaximumSize(new Dimension(200,30));
 		
@@ -119,7 +122,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		JLabel lastNameLabel = new JLabel("Surname: ");
 		JLabel birthDateLabel = new JLabel("Date of Birth: ");
 		JLabel postcodeLabel = new JLabel("Postcode: ");
-		JLabel 
+		
 		idLabel = new JLabel(patientID.toString());
 		idLabel.setVisible(false);
 		idLabel.setFont(new Font("Arial",0,25));
@@ -132,20 +135,18 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		this.add(birthDateText);
 		this.add(postcodeLabel);
 		this.add(postcodeText);
-		JButton submit = new JButton("GET PATIENT ID");
-		this.add(submit);
-		submit.addActionListener(new GetPatientIDHandler(this));
-		submit.setMaximumSize(new Dimension(200,40));
 		
 		
-		this.add(timesComboBox);
+		
+		this.add(startTimesComboBox);
+		this.add(endTimesComboBox);
 		this.add(yearComboBox);
 		this.add(monthComboBox);
 		this.add(dayComboBox);
 		this.add(staffMember);
 		
 		JButton makeBooking = new JButton("Book Appointment");
-		makeBooking.addActionListener(new BookingHandler(getTime(),getYear(), getMonth(),getDay(),getStaff()));
+		makeBooking.addActionListener(new BookingHandler(this));
 		this.add(makeBooking);
 
 
@@ -255,8 +256,12 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	public String getDay(){
 		return (String) dayComboBox.getSelectedItem();
 	}
-	public String getTime(){
-		return (String) timesComboBox.getSelectedItem();
+	public String getStartTime(){
+		System.out.println(startTimesComboBox.getSelectedItem());
+		return (String) startTimesComboBox.getSelectedItem();
+	}
+	public String getEndTime(){
+		return (String) endTimesComboBox.getSelectedItem();
 	}
 	public String getStaff(){
 		return (String) staffMember.getSelectedItem();

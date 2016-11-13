@@ -1,6 +1,14 @@
 package Database;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Database{
 	public boolean selectQ;
@@ -14,6 +22,13 @@ public class Database{
 		query = "SELECT "+item+" FROM "+table;
 		this.table = table;
 		return (Patient) excQuery(query);
+	}
+	public Object getAppointmentsWeek(Date weekCommencing, String table){
+		selectQ= true;
+		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(weekCommencing)+" and "+dateFormatter(weekCommencing);
+		this.table = table;
+		System.out.println(query);
+		return excQuery(query);
 	}
 	public Object selectPatient(String item, String table,String param){
 		selectQ = true;
@@ -43,9 +58,11 @@ public class Database{
 		query = "DELETE FROM patients WHERE patient_id="+patient.getPatientID();
 		excQuery(query);
 	}
-	public void bookDentistAppointment(java.sql.Time booking){
+	public void bookDentistAppointment(String booking){
 		selectQ = false;
-		query = "INSERT INTO dentist_appointments VALUES(";
+		query = "INSERT INTO dentist_appointments VALUES ("+booking+")";
+		System.out.println(query);
+		excQuery(query);
 	}
   public Object excQuery(String query)
   {
@@ -69,7 +86,7 @@ public class Database{
 	      {
 	    	  if (table=="patients"){
 	    		result = getPatientResults(rs);
-	    	  }else if (table=="appointments"){
+	    	  }else if (table=="dentist_appointments"){
 	    		  result = getAppointmentResults(rs);
 	    	  }
       }} else {
@@ -97,13 +114,39 @@ public class Database{
 		allRes.setHealthCare(r.getString("healthcare"));
 		return allRes;
   }
-  public Appointment getAppointmentResults(ResultSet r) throws SQLException{
-	    Appointment allRes = new Appointment(); 
-	    allRes.setStartTime(r.getTime("appointment_start"));
-		allRes.setEndTime(r.getTime("appointment_end"));
+  public ArrayList<Appointment> getAppointmentResults(ResultSet r) throws SQLException{
+	    ArrayList<Appointment> allResults = new ArrayList<Appointment>(); 
+	  	Appointment allRes = new Appointment(); 
+	    allRes.setStartTime(r.getString("appointment_start"));
+		allRes.setEndTime(r.getString("appointment_end"));
 		allRes.setPatient_id(r.getInt("patient_id"));
+		allResults
 		return allRes;
 }
-
-  
+  public String dateFormatter(Date weekCommencing){
+	  	Date newDate = new Date(weekCommencing.getYear(), weekCommencing.getMonth(), weekCommencing.getDate(),weekCommencing.getHours(),weekCommencing.getMinutes());
+	  	System.out.println(newDate.toString());
+	  	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+	    String startDateString = newDate.toString();
+	    String newDateString= "";
+	    Date newerDate= null;
+	    try{
+	        Calendar c = Calendar.getInstance();
+	        c.setTime(sdf.parse(startDateString));
+	        c.add(Calendar.DATE, 7);  // number of days to add
+	        newDateString = sdf.format(c.getTime());
+	        newerDate = c.getTime();
+	        
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	   
+	   
+	  return sqlFormatter(newerDate);
+  }
+	  public String sqlFormatter(Date d){
+			String x = "'"+(d.getYear()+1900)+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":00' ";
+			return x;
+	  }
+	
 }

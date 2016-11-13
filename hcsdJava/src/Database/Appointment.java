@@ -3,10 +3,10 @@ package Database;
 import java.sql.Time;
 
 public class Appointment {
-	public Time startTime;
-	public Time endTime;
+	public String startTime;
+	public String endTime;
 	public int patient_id;
-	public Appointment(Time start, Time end, int patientID){
+	public Appointment(String start, String end, int patientID){
 		this.startTime = start;
 		this.endTime = end;
 		this.patient_id = patientID;
@@ -14,16 +14,16 @@ public class Appointment {
 	public Appointment(){
 		
 	}
-	public Time getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Time startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Time getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Time endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	public int getPatient_id() {
