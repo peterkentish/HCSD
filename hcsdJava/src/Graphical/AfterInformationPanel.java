@@ -137,8 +137,12 @@ public class AfterInformationPanel extends JPanel {
 		}
 		
 		button2.addActionListener(new button2());
+		JButton submit = new JButton("ADD PATIENT");
+		this.add(submit);
 
 	}
+	
+
 
 	
 	public void actionPerformed(ActionEvent e) {

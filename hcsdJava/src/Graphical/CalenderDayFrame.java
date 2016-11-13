@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,26 +31,19 @@ public class CalenderDayFrame extends DefaultFrame {
 	    JButton next = new JButton( "Next" );
 	    subPanel.add( next);
 	    next.addActionListener(new DayPanelHandler(cpd));
-
+	    prev.addActionListener(new DayPanelHandlerPrev(cpd));
 		contentPane.add(subPanel,BorderLayout.NORTH);
 		
-//		class next implements ActionListener {
+
+		
+//		class prev implements ActionListener {
 //			public void actionPerformed(ActionEvent e) {
 //				System.out.println("Works");
-//				//setVisible(false);
+//				setVisible(false);
 //				
 //			}
 //		}
-//		next.addActionListener(new next());
-		
-		class prev implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Works");
-				setVisible(false);
-				
-			}
-		}
-		prev.addActionListener(new prev());
+
 		
 		contentPane.add(cpd,BorderLayout.CENTER);
 		
@@ -58,10 +53,10 @@ public class CalenderDayFrame extends DefaultFrame {
 
 	}
 	
-	public static void main(String[] args) {
-		JFrame frm = new CalenderDayFrame();
-		frm.setVisible(true);
-
-	}
+//	public static void main(String[] args) {
+//		JFrame frm = new CalenderDayFrame();
+//		frm.setVisible(true);
+//
+//	}
 
 }
