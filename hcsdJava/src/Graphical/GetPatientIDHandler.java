@@ -8,19 +8,21 @@ import Database.Patient;
 
 public class GetPatientIDHandler implements ActionListener{
 	private String firstName,lastName, birthDate,postcode;
-    public GetPatientIDHandler(String fn, String ln, String bd, String pc) {
-    	firstName = fn;
-    	lastName = ln;
-    	birthDate = bd;
-    	postcode = pc;
+    BookingAppointmentPanel panel;
+	public GetPatientIDHandler(BookingAppointmentPanel pan) {
+    	panel = pan;
 		
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		Database db = new Database();
-		Patient pat = (Patient) db.selectPatient("*", "patients", "firstName='"+firstName+"' and last_name='"+lastName+"' and birth_date="
-				+birthDate+"' and postcode ='"+postcode+"'");
+		Patient pat = (Patient) db.selectPatient("*", "patients", "first_name='"+panel.getFirstNameText()+"' and last_name='"+panel.getLastNameText()+"' and birth_date='"
+				+panel.getBirthDateText()+"' and postcode ='"+panel.getPostcodeText()+"'");
+		System.out.println(pat.getPatientID());
+		panel.idLabel.setText(pat.getPatientID()+"");
+		
 	}
 
 }
