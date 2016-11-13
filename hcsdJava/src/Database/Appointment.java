@@ -6,7 +6,14 @@ public class Appointment {
 	public Time startTime;
 	public Time endTime;
 	public int patient_id;
-	
+	public Appointment(Time start, Time end, int patientID){
+		this.startTime = start;
+		this.endTime = end;
+		this.patient_id = patientID;
+	}
+	public Appointment(){
+		
+	}
 	public Time getStartTime() {
 		return startTime;
 	}

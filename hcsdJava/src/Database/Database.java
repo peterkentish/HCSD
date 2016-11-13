@@ -43,6 +43,10 @@ public class Database{
 		query = "DELETE FROM patients WHERE patient_id="+patient.getPatientID();
 		excQuery(query);
 	}
+	public void bookDentistAppointment(java.sql.Time booking){
+		selectQ = false;
+		query = "INSERT INTO dentist_appointments VALUES(";
+	}
   public Object excQuery(String query)
   {
 	  Object result = null;
