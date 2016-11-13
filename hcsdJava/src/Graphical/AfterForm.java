@@ -6,28 +6,29 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class AfterForm extends DefaultFrame  {
+public class AfterForm extends JPanel  {
 	
 	public AfterForm(){
 		
-		setTitle("After");
+		//setTitle("After");
 		
-		Container contentPane = this.getContentPane();
+		JPanel panel = new JPanel();
 		AfterInformationPanel info = new AfterInformationPanel();
-		contentPane.setLayout(new BorderLayout());
-		contentPane.add(info,BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout());
+		panel.add(info,BorderLayout.CENTER);
 		JButton submit = new JButton("ADD PATIENT");
 		
 		//submit.addActionListener(new RegistrationHandler(info));
 		submit.setMaximumSize(new Dimension(200,40));
-		contentPane.add(submit,BorderLayout.SOUTH);
+		panel.add(submit,BorderLayout.SOUTH);
 		
 
 	}
-	public static void main(String[] args) {
-		JFrame frm = new AfterForm();
-		frm.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame frm = new AfterForm();
+//		frm.setVisible(true);
+//	}
 
 }

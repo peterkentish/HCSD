@@ -9,7 +9,8 @@ import javax.swing.*;
 
 public class UserSelect extends DefaultFrame  {
 	
-
+  //SecretaryMain sm = new SecretaryMain();
+ // HygienistMain hm = new HygienistMain();
 	
 	
 	
@@ -26,7 +27,8 @@ public class UserSelect extends DefaultFrame  {
 		
 			class button1 implements ActionListener {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("Works");
+					JFrame x = new SecretaryMain();
+					x.setVisible(true);
 					setVisible(false);
 					
 				}
@@ -37,10 +39,32 @@ public class UserSelect extends DefaultFrame  {
 
 		contentPane.add(button2);
 		
+		
+		
+		class button2 implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				JFrame x = new DentistMain();
+				x.setVisible(true);
+				setVisible(false);
+				
+			}
+		}
+	button2.addActionListener(new button2());
+
+		
 		JButton button3 = new JButton("Hygienist");
 
 		contentPane.add(button3);
 		
+		class button3 implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				JFrame x = new HygienistMain();
+				x.setVisible(true);
+				setVisible(false);
+				
+			}
+		}
+	button3.addActionListener(new button3());
 
 		
 
