@@ -1,6 +1,11 @@
 package Database;
 
-import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import Graphical.CalendarPanel;
 
 public class Appointment {
 	public String startTime;
@@ -35,6 +40,23 @@ public class Appointment {
 	public String toString() {
 		return String
 				.format("%s, %s ,%s",startTime, endTime, patient_id);
+	}
+	public Date stringToDate(String s){
+		System.out.println("---------"+s);
+	  	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String startDateString = s;
+	    String newDateString= "";
+	    Date newerDate= null;
+	    try{
+	        Calendar c = Calendar.getInstance();
+	        c.setTime(sdf.parse(startDateString));
+	        c.add(Calendar.DATE, 7);  // number of days to add
+	        newDateString = sdf.format(c.getTime());
+	        newerDate = c.getTime();
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	    return newerDate;
 	}
 
 }
