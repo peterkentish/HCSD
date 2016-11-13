@@ -74,24 +74,61 @@ public class CalendarPanel extends JPanel {
 		g.setFont(titleFont);
 		g.drawString("Week Commencing "+weekStart.toString().substring(4, 10), 400, 25);
 		ArrayList<Appointment> apps =(ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, "dentist_appointments");
+		ArrayList<Date> appTimes = new ArrayList<Date>();
 		g.setFont(mainFont);
 		for (int i=0;i<apps.size();i++){
-			
+			appTimes.add(stringToDate(apps.get(i).getStartTime()));
+			appTimes.add(stringToDate(apps.get(i).getEndTime()));
 		}
 		for (int i=0;i<dayOfWeek.length;i++){
+			int xValue = 135+150*i;
 			g.drawString(dayOfWeek[i], 160+150*i, 50);
-			g.drawLine(135+150*i, 50, 135+150*i, this.getHeight());
+			g.drawLine(xValue, 50, xValue, this.getHeight());
+			
 		}
+		
+		
 		for (int i=0;i<times.size();i++){
+			int yValue = 70+23*i;
 			g.drawString(timesString.get(i), 40, 70+23*i);
-			g.drawLine(40,74+23*i,this.getWidth(),74+23*i);
+			g.drawLine(40,yValue,this.getWidth(),yValue);
+			
+			for (int j = 0; j<appTimes.size();j=j+2){
+				System.out.println("---"+getHoursMins(times.get(i)));
+				System.out.println("___"+getHoursMins(appTimes.get(j)));
+				if (getHoursMins(times.get(i)).equals(getHoursMins(appTimes.get(j)))){
+					g.drawString("APPOINTMENT",140, yValue);
+				}
+			}
 		}
+
 		
 	}
 	public String sqlFormatterToday(Date d){
 		String x = "'"+(d.getYear()+1900)+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":00' ";
 		return x;
 	}
-	
-	
+	  public Date stringToDate(String s){
+		  	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String startDateString = s;
+		    String newDateString= "";
+		    Date newerDate= null;
+		    try{
+		        Calendar c = Calendar.getInstance();
+		        c.setTime(sdf.parse(startDateString));
+		        c.add(Calendar.DATE, 7);  // number of days to add
+		        newDateString = sdf.format(c.getTime());
+		        newerDate = c.getTime();
+		    } catch (ParseException e) {
+		        e.printStackTrace();
+		    }
+		    return newerDate;
+	  }
+	  public String getHoursMins(Date d){
+		 Integer h = d.getHours();
+		 Integer m = d.getMinutes();
+		 String x = h+":"+m;
+		 return x;
+		  
+	  }
 }
