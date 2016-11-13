@@ -115,13 +115,16 @@ public class Database{
 		return allRes;
   }
   public ArrayList<Appointment> getAppointmentResults(ResultSet r) throws SQLException{
-	    ArrayList<Appointment> allResults = new ArrayList<Appointment>(); 
-	  	Appointment allRes = new Appointment(); 
-	    allRes.setStartTime(r.getString("appointment_start"));
-		allRes.setEndTime(r.getString("appointment_end"));
-		allRes.setPatient_id(r.getInt("patient_id"));
-		allResults
-		return allRes;
+	  	ArrayList<Appointment> apps = new ArrayList<Appointment>(); 
+	  	while (r.next()){
+	  		Appointment allRes = new Appointment();
+	  		allRes.setStartTime(r.getString("appointment_start"));
+	  		allRes.setEndTime(r.getString("appointment_end"));
+	  		allRes.setPatient_id(r.getInt("patient_id"));
+	  		apps.add(allRes);
+	  		
+	  	}
+		return apps;
 }
   public String dateFormatter(Date weekCommencing){
 	  	Date newDate = new Date(weekCommencing.getYear(), weekCommencing.getMonth(), weekCommencing.getDate(),weekCommencing.getHours(),weekCommencing.getMinutes());

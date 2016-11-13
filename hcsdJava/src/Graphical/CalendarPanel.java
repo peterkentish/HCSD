@@ -75,9 +75,9 @@ public class CalendarPanel extends JPanel {
 		g.drawString("Week Commencing "+weekStart.toString().substring(4, 10), 400, 25);
 		ArrayList<Appointment> apps =(ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, "dentist_appointments");
 		g.setFont(mainFont);
-//		for (int i=0;i<apps.size();i++){
-//			System.out.println(apps.get(i));
-//		}
+		for (int i=0;i<apps.size();i++){
+			
+		}
 		for (int i=0;i<dayOfWeek.length;i++){
 			g.drawString(dayOfWeek[i], 160+150*i, 50);
 			g.drawLine(135+150*i, 50, 135+150*i, this.getHeight());
@@ -90,7 +90,6 @@ public class CalendarPanel extends JPanel {
 	}
 	public String sqlFormatterToday(Date d){
 		String x = "'"+(d.getYear()+1900)+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":00' ";
-		System.out.println(x);
 		return x;
 	}
 	

@@ -35,7 +35,6 @@ public class SecretaryMain extends DefaultFrame{
 	public static void main(String[] args) {
 		JFrame x = new SecretaryMain();
 		x.setVisible(true);
-		Database db = new Database();
-//		db.dateFormatter("2016-11-9  14:40:00");
+
 	}
 }
