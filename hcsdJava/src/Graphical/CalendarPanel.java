@@ -38,7 +38,7 @@ public class CalendarPanel extends JPanel implements ActionListener {
 	
 	public void getStartOfWeek(int i){
 		Calendar c = Calendar.getInstance();
-		//testign
+		//testing
 		c.setFirstDayOfWeek(Calendar.MONDAY);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		weekStart = c.getTime();
