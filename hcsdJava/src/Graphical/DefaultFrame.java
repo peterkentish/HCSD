@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 
 
 public class DefaultFrame extends JFrame {
-	
 	public DefaultFrame(){
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		setBackground(Color.blue);

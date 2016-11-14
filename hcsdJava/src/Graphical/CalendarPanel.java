@@ -1,9 +1,12 @@
 package Graphical;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,35 +15,42 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Database.Appointment;
 import Database.Database;
 import Database.Patient;
 
-public class CalendarPanel extends JPanel {
+public class CalendarPanel extends JPanel implements ActionListener {
 	
 	
 	ArrayList<Appointment> apps =new ArrayList<Appointment>(); 
 	String[] dayOfWeek = new String[5];
 	List<java.sql.Time> times = new ArrayList<>();
 	ArrayList<String> timesString = new ArrayList<String>();
+	
+	String staff;
 	Date weekStart;
+	
 	Database db = new Database();
 	
-	public void getStartOfWeek(){
+	public void getStartOfWeek(int i){
 		Calendar c = Calendar.getInstance();
+		
 		c.setFirstDayOfWeek(Calendar.MONDAY);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		
 		weekStart = c.getTime();
 		int weekStartInt = weekStart.getDate();
+		if (i!=0){
+			weekStart.setDate(i);
+		}
 		int monthInt = weekStart.getMonth();
 	}
 	public void populateTimesOfDay(){
 		java.sql.Time startTime = new java.sql.Time(9, 0, 0);
 		java.sql.Time endTime = new java.sql.Time(17, 0, 0);
-
 		times.add(startTime);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(startTime);
@@ -60,19 +70,29 @@ public class CalendarPanel extends JPanel {
 		dayOfWeek[3]="Thursday";
 		dayOfWeek[4]="Friday";
 	}
-	public CalendarPanel(){
+	public CalendarPanel(String staffS){
+		this.staff = staffS;
 		setBackground(Color.WHITE);	
 		populateTimesOfDay();
 		populateDaysOfWeek();
-		getStartOfWeek();
-		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, "dentist_appointments");
-		System.out.println(apps.size());
+		getStartOfWeek(0);
+		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, staff);
+		JButton next = new JButton("Next");
+		next.addActionListener(this);
+		JButton back = new JButton("Back");
+		back.addActionListener(this);
+		
+		this.add(back);
+		this.add(Box.createRigidArea(new Dimension(400,0)));
+		this.add(next);
+		next.setBounds(200, 100, 50, 50);
 	}
 	public void paintComponent(Graphics graphics){
 		super.paintComponent(graphics);
 		Graphics2D g = (Graphics2D) graphics;
 		Font mainFont = new Font("Century Gothic", 0, 20);
 		Font titleFont = new Font("Century Gothic", 0, 28);
+		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, staff);
 		sqlFormatterToday(weekStart);
 		g.setFont(titleFont);
 		g.drawString("Week Commencing "+weekStart.toString().substring(4, 10), 400, 25);
@@ -86,40 +106,43 @@ public class CalendarPanel extends JPanel {
 		g.drawString("Appointment Start", -400, 30);
 		g.setTransform(gSave);
 		
-		System.out.println(apps.size());
-		for (Appointment a : apps){
-			System.out.println(a.getStartTime());
-			appTimes.add(stringToDate(a.getStartTime()));
-			appTimes.add(stringToDate(a.getEndTime()));
-			Date s = a.stringToDate(a.getStartTime());
-			patients.add((Patient) db.selectPatient("*", "patients", "patient_id="+a.getPatient_id()));
-		}
 		
+		if (apps != null) {
+			for (Appointment a : apps) {
+				appTimes.add(stringToDate(a.getStartTime()));
+				appTimes.add(stringToDate(a.getEndTime()));
+				Date s = a.stringToDate(a.getStartTime());
+				patients.add((Patient) db.selectPatient("*", "patients",
+						"patient_id=" + a.getPatient_id()));
+			}
+		}
 		for (int i=0;i<dayOfWeek.length;i++){
 			int xValue = 135+210*i;
 			g.drawString(dayOfWeek[i], 190+210*i, 50);
 			g.drawLine(xValue, 50, xValue, this.getHeight());
 		}
 		
-
+		System.out.println("PATIENT LENGTH "+patients.size());
 		for (int i=0;i<times.size();i++){
 			int yValue = 70+23*i;
 			g.drawString(timesString.get(i), 40, 70+23*i);
 			g.drawLine(40,yValue,this.getWidth(),yValue);
-			for (int j = 0; j<appTimes.size();j=j+2){
-				if (getHoursMins(times.get(i)).equals(getHoursMins(appTimes.get(j)))){
-					int apptLength= getDifference(appTimes.get(j), appTimes.get(j+1))/20;
-					for (int z=0;z<apptLength;z++){
-						System.out.println(z);
-						g.drawString(patients.get(j/2).getFirstName(),140+(appTimes.get(j).getDay()-1)*210,yValue+z*23);
+			
+			if (apps!=null) {
+				for (int j = 0; j < appTimes.size(); j = j + 2) {
+					if (getHoursMins(times.get(i)).equals(
+							getHoursMins(appTimes.get(j)))) {
+						int apptLength = getDifference(appTimes.get(j),
+								appTimes.get(j + 1)) / 20;
+						for (int z = 0; z < apptLength; z++) {
+							g.drawString(patients.get(j/2).getFirstName(),
+									140 + (appTimes.get(j).getDay() - 1) * 210,
+									yValue + z * 23);
+						}
 					}
 				}
-				
-				
 			}
 		}
-
-		
 	}
 	public String sqlFormatterToday(Date d){
 		String x = "'"+(d.getYear()+1900)+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":00' ";
@@ -152,13 +175,23 @@ public class CalendarPanel extends JPanel {
 		    int numHours1 =date1.getHours();
 		    int numMinutes1 = date1.getMinutes();
 		    int total1 = numHours1*60+numMinutes1;
-		    
 		    int numHours2 = date2.getHours();
 		    int numMinutes2 = date2.getMinutes();
 		    int total2 =numHours2*60 +numMinutes2;
-		    
-		    int total = total2 - total1;
-		
+		    int total = total2 - total1;		
 		    return total;
 		}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		int current = weekStart.getDate();
+		if (e.getActionCommand().equals("Next")){
+			weekStart.setDate(current+7);
+		}else {
+			weekStart.setDate(current-7);
+		}
+		
+		
+		repaint();
+	}
 }

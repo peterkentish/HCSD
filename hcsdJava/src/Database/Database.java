@@ -27,7 +27,7 @@ public class Database{
 		selectQ= true;
 		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(weekCommencing)+" and "+dateFormatter(weekCommencing);
 		this.table = table;
-		System.out.println(query);
+//		System.out.println(query);
 		return excQuery(query);
 	}
 	
@@ -35,13 +35,13 @@ public class Database{
 		selectQ= true;
 		query = "SELECT * FROM "+table+" WHERE appointment_start  "+sqlFormatter(day);
 		this.table = table;
-		System.out.println(query);
+//		System.out.println(query);
 		return excQuery(query);
 	}
 	public Object selectPatient(String item, String table,String param){
 		selectQ = true;
 		query = "SELECT "+item+" FROM "+table+" WHERE "+param;
-		System.out.println(query);
+//		System.out.println(query);
 		this.table = table;
 		return excQuery(query);
 	}
@@ -58,7 +58,7 @@ public class Database{
 	public void addPatient(Patient patient){
 		selectQ = false;
 		query = "INSERT INTO patients VALUES ("+patient.toSQLString()+")";
-		System.out.println(query);
+//		System.out.println(query);
 		excQuery(query);
 	}
 	public void deletePatient(Patient patient){
@@ -69,7 +69,7 @@ public class Database{
 	public void bookDentistAppointment(String booking){
 		selectQ = false;
 		query = "INSERT INTO dentist_appointments VALUES ("+booking+")";
-		System.out.println(query);
+//		System.out.println(query);
 		excQuery(query);
 	}
   public Object excQuery(String query)
@@ -145,7 +145,6 @@ public class Database{
 	        c.add(Calendar.DATE, 7);  // number of days to add
 	        newDateString = sdf.format(c.getTime());
 	        newerDate = c.getTime();
-	        
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }

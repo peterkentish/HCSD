@@ -30,7 +30,6 @@ public class UserSelect extends DefaultFrame  {
 					JFrame x = new SecretaryMain();
 					x.setVisible(true);
 					setVisible(false);
-					
 				}
 			}
 		button1.addActionListener(new button1());
