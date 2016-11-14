@@ -124,14 +124,13 @@ public class Database{
   }
   public ArrayList<Appointment> getAppointmentResults(ResultSet r) throws SQLException{
 	  	ArrayList<Appointment> apps = new ArrayList<Appointment>(); 
-	  	while (r.next()){
+	  	do{
 	  		Appointment allRes = new Appointment();
 	  		allRes.setStartTime(r.getString("appointment_start"));
 	  		allRes.setEndTime(r.getString("appointment_end"));
 	  		allRes.setPatient_id(r.getInt("patient_id"));
 	  		apps.add(allRes);
-	  		
-	  	}
+	  	} while  (r.next());
 		return apps;
 }
   public String dateFormatter(Date weekCommencing){

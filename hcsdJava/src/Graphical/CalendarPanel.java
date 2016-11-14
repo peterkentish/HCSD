@@ -21,7 +21,7 @@ import Database.Patient;
 public class CalendarPanel extends JPanel {
 	
 	
-	
+	ArrayList<Appointment> apps =new ArrayList<Appointment>(); 
 	String[] dayOfWeek = new String[5];
 	List<java.sql.Time> times = new ArrayList<>();
 	ArrayList<String> timesString = new ArrayList<String>();
@@ -32,6 +32,7 @@ public class CalendarPanel extends JPanel {
 		Calendar c = Calendar.getInstance();
 		c.setFirstDayOfWeek(Calendar.MONDAY);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		
 		weekStart = c.getTime();
 		int weekStartInt = weekStart.getDate();
 		int monthInt = weekStart.getMonth();
@@ -64,6 +65,8 @@ public class CalendarPanel extends JPanel {
 		populateTimesOfDay();
 		populateDaysOfWeek();
 		getStartOfWeek();
+		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, "dentist_appointments");
+		System.out.println(apps.size());
 	}
 	public void paintComponent(Graphics graphics){
 		super.paintComponent(graphics);
@@ -73,7 +76,7 @@ public class CalendarPanel extends JPanel {
 		sqlFormatterToday(weekStart);
 		g.setFont(titleFont);
 		g.drawString("Week Commencing "+weekStart.toString().substring(4, 10), 400, 25);
-		ArrayList<Appointment> apps =(ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, "dentist_appointments");
+		
 		ArrayList<Date> appTimes = new ArrayList<Date>();
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 		
@@ -82,6 +85,8 @@ public class CalendarPanel extends JPanel {
 		g.rotate(-Math.PI/2);
 		g.drawString("Appointment Start", -400, 30);
 		g.setTransform(gSave);
+		
+		System.out.println(apps.size());
 		for (Appointment a : apps){
 			System.out.println(a.getStartTime());
 			appTimes.add(stringToDate(a.getStartTime()));
@@ -106,7 +111,7 @@ public class CalendarPanel extends JPanel {
 					int apptLength= getDifference(appTimes.get(j), appTimes.get(j+1))/20;
 					for (int z=0;z<apptLength;z++){
 						System.out.println(z);
-						g.drawString(patients.get(j/2).getFirstName(),140+appTimes.get(j).getDay()*210,yValue+z*23);
+						g.drawString(patients.get(j/2).getFirstName(),140+(appTimes.get(j).getDay()-1)*210,yValue+z*23);
 					}
 				}
 				
