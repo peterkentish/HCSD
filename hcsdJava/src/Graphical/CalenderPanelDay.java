@@ -132,10 +132,10 @@ public class CalenderPanelDay extends JPanel{
 		
 		g.setFont(mainFont);
 		
-		for (int i=0;i<apps.size();i++){
-			appTimes.add(stringToDate(apps.get(i).getStartTime()));
-			appTimes.add(stringToDate(apps.get(i).getEndTime()));
-		}
+//		for (int i=0;i<apps.size();i++){
+//			appTimes.add(stringToDate(apps.get(i).getStartTime()));
+//			appTimes.add(stringToDate(apps.get(i).getEndTime()));
+//		}
 
 		for (int i=0;i<times.size();i++){
 			int yValue = 70+23*i;

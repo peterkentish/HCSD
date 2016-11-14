@@ -3,6 +3,16 @@ package Graphical;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -139,10 +149,22 @@ public class AfterInformationPanel extends JPanel {
 		button2.addActionListener(new button2());
 		JButton submit = new JButton("ADD PATIENT");
 		this.add(submit);
-
-	}
+		
+		class submit implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				GenerateReceipt g = new GenerateReceipt();
+				try {
+					g.writeFile(5);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		submit.addActionListener(new submit());
 	
-
+	
+		}
 
 	
 	public void actionPerformed(ActionEvent e) {

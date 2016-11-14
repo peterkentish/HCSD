@@ -13,10 +13,10 @@ public class HygienistMain extends AfterDayMain {
 		setTitle("Hygienist");
 		Container contentPane = getContentPane();
 		AfterInformationPanel info = new AfterInformationPanel();
-		CalenderDayFrame cdf = new CalenderDayFrame();
+		//CalenderDayFrame cdf = new CalenderDayFrame();
 		contentPane.add(jtp);
 		jtp.addTab("After Patient Form", info);
-		jtp.addTab("Day View", cdf);
+		//jtp.addTab("Day View", cdf);
 
 	}
 

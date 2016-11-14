@@ -3,6 +3,9 @@ package Graphical;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.PrintWriter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +22,21 @@ public class AfterForm extends JPanel  {
 		panel.setLayout(new BorderLayout());
 		panel.add(info,BorderLayout.CENTER);
 		JButton submit = new JButton("ADD PATIENT");
+		
+		class submit implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				try{
+				    PrintWriter writer = new PrintWriter("Reciept.txt", "UTF-8");
+				    writer.println("The first line");
+				    writer.println("The second line");
+				    writer.close();
+				} catch (Exception a) {
+				   // do something
+				}
+				
+			}
+		}
+	submit.addActionListener(new submit());
 		
 		//submit.addActionListener(new RegistrationHandler(info));
 		submit.setMaximumSize(new Dimension(200,40));
