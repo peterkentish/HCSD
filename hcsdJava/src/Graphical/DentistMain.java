@@ -13,7 +13,7 @@ public class DentistMain extends AfterDayMain {
 		setTitle("Dentist");
 		Container contentPane = getContentPane();
 		AfterInformationPanel info = new AfterInformationPanel();
-		CalenderDayFrame cdf = new CalenderDayFrame();
+		//CalenderDayFrame cdf = new CalenderDayFrame();
 		contentPane.add(jtp);
 		jtp.addTab("After Patient Form", info);
 		//jtp.addTab("Day View", cdf);

@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -66,17 +67,19 @@ public class AfterInformationPanel extends JPanel {
 		JLabel serviceLabel2 = new JLabel("Service: ");
 		JLabel serviceLabel3 = new JLabel("Service: ");
 
-
+		serviceComboBox1.addItem("No Service");
 		serviceComboBox1.addItem("Hygiene");
 		serviceComboBox1.addItem("Check-up");
 		serviceComboBox1.addItem("Amalgam filling");
 		serviceComboBox1.setMaximumSize(new Dimension(200,30));
 		
+		serviceComboBox2.addItem("No Service");
 		serviceComboBox2.addItem("Hygiene");
 		serviceComboBox2.addItem("Check-up");
 		serviceComboBox2.addItem("Amalgam filling");
 		serviceComboBox2.setMaximumSize(new Dimension(200,30));
 		
+		serviceComboBox3.addItem("No Service");
 		serviceComboBox3.addItem("Hygiene");
 		serviceComboBox3.addItem("Check-up");
 		serviceComboBox3.addItem("Amalgam filling");
@@ -154,7 +157,38 @@ public class AfterInformationPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				GenerateReceipt g = new GenerateReceipt();
 				try {
-					g.writeFile(5);
+					ArrayList<String> services = new ArrayList<String>();
+					String fname = firstNameText.getText();
+					String sname = lastNameText.getText();
+					String service1  = serviceComboBox1.getSelectedItem().toString();
+					String service2  = serviceComboBox2.getSelectedItem().toString();
+					String service3  = serviceComboBox3.getSelectedItem().toString();
+					System.out.println(service3);
+					int price = 0;
+					if(!service1.equals("No Service")){
+						services.add(service1);
+						
+					}
+					if(!service2.equals("No Service")){
+						services.add(service2);
+						
+					}
+					if(!service3.equals("No Service")){
+						services.add(service3);
+						
+					}
+					if(service1.equals("Hygiene")|| service2.equals("Hygiene")|| service3.equals("Hygiene")){
+						 price +=45;	
+					}
+					if(service1.equals("Check-up")|| service2.equals("Check-up")|| service3.equals("Check-up")){
+						 price +=45;	
+					}
+					if(service1.equals("Amalgam filling")|| service2.equals("Amalgam filling")|| service3.equals("Amalgam filling")){
+						 price +=90;	
+					}
+					String name = fname + " " + sname;
+					String cost = Integer.toString(price);
+					g.writeFile(cost, name, services);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
