@@ -17,18 +17,17 @@ public class SecretaryMain extends DefaultFrame{
 		CalendarPanel dentistCal = new CalendarPanel("dentist_appointments");
 		CalendarPanel hygieneCal = new CalendarPanel("hygiene_appointments");
 		RegistrationInformationPanel regPan = new RegistrationInformationPanel();
-		
 		BookingAppointmentPanel bookPan = new BookingAppointmentPanel();
 
 		
-	      setTitle("Secretary");
-	      JTabbedPane jtp = new JTabbedPane();
-	      contentPane.add(jtp);
-	      
-	      jtp.addTab("Dentist Week Schedule", dentistCal);
-	      jtp.addTab("Hygiene Week Schedule", hygieneCal);
-          jtp.addTab("Register a new Patient", regPan);
-          jtp.addTab("Book another Appointment", bookPan);
+		  setTitle("Secretary");
+		  JTabbedPane jtp = new JTabbedPane();
+		  contentPane.add(jtp);
+		  
+		  jtp.addTab("Dentist Week Schedule", dentistCal);
+		  jtp.addTab("Hygiene Week Schedule", hygieneCal);
+		  jtp.addTab("Register a new Patient", regPan);
+		  jtp.addTab("Book another Appointment", bookPan);
           
 	}
 	public static void main(String[] args) {
