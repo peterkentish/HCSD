@@ -27,25 +27,22 @@ public class CalendarPanelDay extends JPanel implements ActionListener {
 	
 	
 	ArrayList<Appointment> apps =new ArrayList<Appointment>(); 
-	String[] dayOfWeek = new String[5];
+
 	List<java.sql.Time> times = new ArrayList<>();
 	ArrayList<String> timesString = new ArrayList<String>();
 	
 	String staff;
-	Date weekStart;
+	Date today;
 	
 	Database db = new Database();
 	
 	public void getStartOfWeek(int i){
 		Calendar c = Calendar.getInstance();
-		c.setFirstDayOfWeek(Calendar.MONDAY);
-		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		weekStart = c.getTime();
-		int weekStartInt = weekStart.getDate();
-		if (i!=0){
-			weekStart.setDate(i);
-		}
-		int monthInt = weekStart.getMonth();
+		today = c.getTime();
+		int weekStartInt = today.getDate();
+		today.setHours(1);
+		today.setMinutes(1);
+		int monthInt = today.getMonth();
 	}
 	public void populateTimesOfDay(){
 		java.sql.Time startTime = new java.sql.Time(9, 0, 0);
@@ -62,27 +59,20 @@ public class CalendarPanelDay extends JPanel implements ActionListener {
 		    timesString.add(sdf.format(time));
 		}
 	}
-	public void populateDaysOfWeek(){
-		dayOfWeek[0]="Monday";
-		dayOfWeek[1]="Tuesday";
-		dayOfWeek[2]="Wednesday";
-		dayOfWeek[3]="Thursday";
-		dayOfWeek[4]="Friday";
-	}
+
 	public CalendarPanelDay(String staffS){
 		this.staff = staffS;
 		setBackground(Color.WHITE);	
 		populateTimesOfDay();
-		populateDaysOfWeek();
 		getStartOfWeek(0);
-		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, staff);
+		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(today, staff);
 		JButton next = new JButton("Next");
 		next.addActionListener(this);
 		JButton back = new JButton("Back");
 		back.addActionListener(this);
 		
 		this.add(back);
-		this.add(Box.createRigidArea(new Dimension(400,0)));
+		this.add(Box.createRigidArea(new Dimension(200,0)));
 		this.add(next);
 		next.setBounds(200, 100, 50, 50);
 	}
@@ -91,10 +81,10 @@ public class CalendarPanelDay extends JPanel implements ActionListener {
 		Graphics2D g = (Graphics2D) graphics;
 		Font mainFont = new Font("Century Gothic", 0, 20);
 		Font titleFont = new Font("Century Gothic", 0, 28);
-		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, staff);
-		sqlFormatterToday(weekStart);
+		apps = (ArrayList<Appointment>) db.getAppointmentsDay(today, staff);
+		sqlFormatterToday(today);
 		g.setFont(titleFont);
-		g.drawString("Week Commencing "+weekStart.toString().substring(4, 10), 400, 25);
+		g.drawString(today.toString().substring(4, 10), 540, 25);
 		
 		ArrayList<Date> appTimes = new ArrayList<Date>();
 		ArrayList<Patient> patients = new ArrayList<Patient>();
@@ -115,13 +105,8 @@ public class CalendarPanelDay extends JPanel implements ActionListener {
 						"patient_id=" + a.getPatient_id()));
 			}
 		}
-		for (int i=0;i<dayOfWeek.length;i++){
-			int xValue = 135+210*i;
-			g.drawString(dayOfWeek[i], 190+210*i, 50);
-			g.drawLine(xValue, 50, xValue, this.getHeight());
-		}
 		
-		System.out.println("PATIENT LENGTH "+patients.size());
+		g.drawLine(110, 40,110, this.getHeight());
 		for (int i=0;i<times.size();i++){
 			int yValue = 70+23*i;
 			g.drawString(timesString.get(i), 40, 70+23*i);
@@ -182,11 +167,11 @@ public class CalendarPanelDay extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		int current = weekStart.getDate();
+		int current = today.getDate();
 		if (e.getActionCommand().equals("Next")){
-			weekStart.setDate(current+7);
+			today.setDate(current+1);
 		}else {
-			weekStart.setDate(current-7);
+			today.setDate(current-1);
 		}
 		
 		

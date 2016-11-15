@@ -25,7 +25,7 @@ public class Database{
 	}
 	public Object getAppointmentsWeek(Date weekCommencing, String table){
 		selectQ= true;
-		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(weekCommencing)+" and "+dateFormatter(weekCommencing);
+		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(weekCommencing)+" and "+dateFormatter(weekCommencing,7);
 		this.table = table;
 		System.out.println(query);
 		return excQuery(query);
@@ -33,9 +33,9 @@ public class Database{
 	
 	public Object getAppointmentsDay(Date day, String table){
 		selectQ= true;
-		query = "SELECT * FROM "+table+" WHERE appointment_start  "+sqlFormatter(day);
+		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(day)+" and "+dateFormatter(day, 1);
 		this.table = table;
-		
+		System.out.println(query);
 		return excQuery(query);
 	}
 	public Object selectPatient(String item, String table,String param){
@@ -134,7 +134,7 @@ public class Database{
 	  	} while  (r.next());
 		return apps;
 }
-  public String dateFormatter(Date weekCommencing){
+  public String dateFormatter(Date weekCommencing,int daysToAdd){
 	  	Date newDate = new Date(weekCommencing.getYear(), weekCommencing.getMonth(), weekCommencing.getDate(),weekCommencing.getHours(),weekCommencing.getMinutes());
 	  	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 	    String startDateString = newDate.toString();
@@ -143,7 +143,7 @@ public class Database{
 	    try{
 	        Calendar c = Calendar.getInstance();
 	        c.setTime(sdf.parse(startDateString));
-	        c.add(Calendar.DATE, 7);  // number of days to add
+	        c.add(Calendar.DATE, daysToAdd);  // number of days to add
 	        newDateString = sdf.format(c.getTime());
 	        newerDate = c.getTime();
 	    } catch (ParseException e) {
