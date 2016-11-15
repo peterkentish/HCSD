@@ -92,8 +92,11 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		
 		for (int i=0;i<times.size();i++){
 			startTimesComboBox.addItem(timesString.get(i));
-			endTimesComboBox.addItem(timesString.get(i));
+			if(i>=1){
+				endTimesComboBox.addItem(timesString.get(i));
+			}
 		}
+		startTimesComboBox.addActionListener(this);
 		Date todaysDate = new Date();
 		int yearToday = todaysDate.getYear()+1900;
 		int monthToday = todaysDate.getMonth()+1;
@@ -173,15 +176,21 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		idLabel.setVisible(true);
+		
 		JComboBox combo = (JComboBox)e.getSource();
 		//get the current year and month from the combo boxes.
 		if (combo.equals(yearComboBox)){
         	String selectedYear = (String)  combo.getSelectedItem();
         	currentYear = Integer.parseInt(selectedYear);
 		}
-		else {
+		else if (combo.equals(monthComboBox)) {
 			String selectedMonth = (String) combo.getSelectedItem();
 	        currentMonth = Integer.parseInt(selectedMonth);
+		} else if (combo.equals(startTimesComboBox)){
+			endTimesComboBox.removeAllItems();
+			for (int i = startTimesComboBox.getSelectedIndex() +1;i<startTimesComboBox.getItemCount();i++){
+				endTimesComboBox.addItem(startTimesComboBox.getItemAt(i));
+			}
 		}
 		//switch to determine which months have how many days.
 			switch (currentMonth) {

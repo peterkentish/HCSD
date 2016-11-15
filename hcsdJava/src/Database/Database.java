@@ -114,6 +114,7 @@ public class Database{
   public Patient getPatientResults(ResultSet r) throws SQLException{
 	    Patient allRes = new Patient(); 
 	    allRes.setPatientID(r.getInt("patient_id"));
+	    allRes.setTitle(r.getString("title"));
 		allRes.setFirstName(r.getString("first_name"));
 		allRes.setLastName(r.getString("last_name"));
 		allRes.setBirthDate(r.getString("birth_date"));

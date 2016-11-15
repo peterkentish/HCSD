@@ -7,24 +7,15 @@ import java.io.*;
 import javax.swing.*;
 
 
-public class UserSelect extends DefaultFrame  {
-	
-  //SecretaryMain sm = new SecretaryMain();
- // HygienistMain hm = new HygienistMain();
-	
-	
-	
+public class UserSelect extends DefaultFrame  {	
 	public UserSelect(){
 		
 		setTitle("Select User");
-		
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new GridLayout(3, 1));
 
 		JButton button1 = new JButton("Secretary");
-
 		contentPane.add(button1);
-		
 			class button1 implements ActionListener {
 				public void actionPerformed(ActionEvent e) {
 					JFrame x = new SecretaryMain();
@@ -60,7 +51,6 @@ public class UserSelect extends DefaultFrame  {
 				JFrame x = new HygienistMain();
 				x.setVisible(true);
 				setVisible(false);
-				
 			}
 		}
 	button3.addActionListener(new button3());

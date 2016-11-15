@@ -118,8 +118,9 @@ public class CalendarPanelDay extends JPanel implements ActionListener {
 						int apptLength = getDifference(appTimes.get(j),
 								appTimes.get(j + 1)) / 20;
 						for (int z = 0; z < apptLength; z++) {
-							g.drawString(patients.get(j/2).getFirstName(),
-									140 + (appTimes.get(j).getDay() - 1) * 210,
+							Patient current = patients.get(j/2);
+							g.drawString(current.getTitle()+" "+current.getFirstName()+" "+current.getLastName(),
+									140,
 									yValue + z * 23);
 						}
 					}
