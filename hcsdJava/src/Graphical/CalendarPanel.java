@@ -38,7 +38,6 @@ public class CalendarPanel extends JPanel implements ActionListener {
 	
 	public void getStartOfWeek(int i){
 		Calendar c = Calendar.getInstance();
-		//testing
 		c.setFirstDayOfWeek(Calendar.MONDAY);
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		weekStart = c.getTime();
@@ -127,7 +126,6 @@ public class CalendarPanel extends JPanel implements ActionListener {
 			int yValue = 70+23*i;
 			g.drawString(timesString.get(i), 40, 70+23*i);
 			g.drawLine(40,yValue,this.getWidth(),yValue);
-			
 			if (apps!=null) {
 				for (int j = 0; j < appTimes.size(); j = j + 2) {
 					if (getHoursMins(times.get(i)).equals(

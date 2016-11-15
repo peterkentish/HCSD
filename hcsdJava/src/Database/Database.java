@@ -27,7 +27,7 @@ public class Database{
 		selectQ= true;
 		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(weekCommencing)+" and "+dateFormatter(weekCommencing);
 		this.table = table;
-//		System.out.println(query);
+		System.out.println(query);
 		return excQuery(query);
 	}
 	
@@ -35,7 +35,7 @@ public class Database{
 		selectQ= true;
 		query = "SELECT * FROM "+table+" WHERE appointment_start  "+sqlFormatter(day);
 		this.table = table;
-//		System.out.println(query);
+		
 		return excQuery(query);
 	}
 	public Object selectPatient(String item, String table,String param){
@@ -53,6 +53,7 @@ public class Database{
 	public Object selectAppointment(String item, String table,String param){
 		query = "SELECT "+item+" FROM "+table+" WHERE "+param;
 		this.table = table;
+		System.out.println(query);
 		return excQuery(query);
 	}
 	public void addPatient(Patient patient){
@@ -94,7 +95,7 @@ public class Database{
 	      {
 	    	  if (table=="patients"){
 	    		result = getPatientResults(rs);
-	    	  }else if (table=="dentist_appointments"){
+	    	  }else if (table=="dentist_appointments" || table == "hygiene_appointments"){
 	    		  result = getAppointmentResults(rs);
 	    	  }
       }} else {

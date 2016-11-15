@@ -15,7 +15,7 @@ public class SecretaryMain extends DefaultFrame{
 		Container contentPane = getContentPane();
 		
 		CalendarPanel dentistCal = new CalendarPanel("dentist_appointments");
-		CalendarPanel hygieneCal = new CalendarPanel("dentist_appointments");
+		CalendarPanel hygieneCal = new CalendarPanel("hygiene_appointments");
 		RegistrationInformationPanel regPan = new RegistrationInformationPanel();
 		
 		BookingAppointmentPanel bookPan = new BookingAppointmentPanel();
