@@ -57,7 +57,7 @@ public class GenerateReceipt {
             writer.newLine();
             writer.write("Price: ");
             
-            writer.write("£"+price);
+            writer.write("\u00a3"+price);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
