@@ -5,7 +5,7 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-public class HygienistMain extends AfterDayMain {
+public class HygienistMain extends DefaultFrame {
 	public HygienistMain() {
 		
 		setTitle("Hygienist");

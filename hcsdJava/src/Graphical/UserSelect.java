@@ -30,7 +30,6 @@ public class UserSelect extends DefaultFrame  {
 		contentPane.add(button2);
 		
 		
-		
 		class button2 implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				JFrame x = new DentistMain();

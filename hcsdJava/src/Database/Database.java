@@ -96,7 +96,7 @@ public class Database{
 	    	  if (table=="patients"){
 	    		result = getPatientResults(rs);
 	    	  }else if (table=="dentist_appointments" || table == "hygiene_appointments"){
-	    		  result = getAppointmentResults(rs);
+				result = getAppointmentResults(rs);
 	    	  }
       }} else {
     	  st.executeUpdate(query);
@@ -107,6 +107,7 @@ public class Database{
     {
       System.err.println("Got an exception! Ooops! ");
       System.err.println(e.getMessage());
+      System.out.println(e.toString());
     }
 	return result;
   }

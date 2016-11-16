@@ -41,6 +41,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	private int currentMonth;
 	private int currentYear;
 	
+	private Database db = new Database();
 	private int daysInMonth = 31;
 	private JComboBox<String> dayComboBox = new JComboBox<String>();
 	private JComboBox<String> yearComboBox = new JComboBox<String>();
@@ -176,7 +177,6 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		idLabel.setVisible(true);
-		
 		JComboBox combo = (JComboBox)e.getSource();
 		//get the current year and month from the combo boxes.
 		if (combo.equals(yearComboBox)){
