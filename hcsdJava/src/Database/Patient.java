@@ -6,13 +6,14 @@ public class Patient {
 	
 	private int patientID;
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
+	private int checks, hyg, repa; 
 	private BigDecimal amountPaid;
 	public Patient() {
 		// TODO Auto-generated constructor stub
 	}
 		
 	
-	public Patient(String title, String firstName,String lastName,String birthDate,String streetAddress,String postcode, String contactNo, String healthcare, BigDecimal amountPaid){
+	public Patient(String title, String firstName,String lastName,String birthDate,String streetAddress,String postcode, String contactNo, String healthcare, BigDecimal amountPaid, int checks, int hyg, int repa){
 		this.title= title;
 		this.firstName = firstName;
 		this.lastName=lastName;
@@ -22,6 +23,9 @@ public class Patient {
 		this.contactNo = contactNo;
 		this.healthCare = healthcare;
 		this.amountPaid = amountPaid;
+		this.checks = checks;
+		this.hyg = hyg;
+		this.repa = repa;
 		
 	}
 
@@ -86,14 +90,35 @@ public class Patient {
 	public BigDecimal getAmountPaid(){
 		return amountPaid;
 	}
+	public void setChecks(int checks){
+		this.checks = checks;
+	}
+	public int getChecks(){
+		return checks;
+	}
+	public void setHyg(int hyg){
+		this.hyg = hyg;
+	}
+	public int getHyg(){
+		return hyg;
+	}
+	public void setRepo(int repa){
+		this.repa = repa;
+	}
+	public int getRepa(){
+		return repa;
+	}
 	
 	public String toString() {
 		return String
-				.format("%s, %s ,%s, %s, %s, %s ,%s, %s, %s, %s \n",patientID,title, firstName,lastName,birthDate, streetAddress,postcode,contactNo, healthCare, amountPaid);
+				.format("%s, %s, %s, %s, %s, %s ,%s, %s, %s, %s, %s, %s, %s \n",patientID,title, firstName,lastName,birthDate, streetAddress,postcode,contactNo, healthCare, amountPaid, checks, hyg, repa);
 	}
 	public String toSQLString() {
 		return String
-				.format("'%s', '%s' ,'%s', '%s', '%s', '%s' ,'%s', '%s', '%s','%s'",patientID,title, firstName,lastName, birthDate,streetAddress,postcode,contactNo, healthCare, amountPaid);
+				.format("'%s', '%s' ,'%s', '%s', '%s', '%s' ,'%s', '%s', '%s','%s','%s','%s','%s'",patientID,title, firstName,lastName, birthDate,streetAddress,postcode,contactNo, healthCare, amountPaid, checks, hyg, repa);
 	}
+
+
+
 	
 }

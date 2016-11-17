@@ -20,6 +20,8 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	private JComboBox<String> healthcareComboBox = new JComboBox<String>();
 	private JTextField firstNameText,lastNameText,birthDateText,streetAddressText,postcodeText,contactNoText, amountPaidText;
 	
+	private int checks, hyg, repa;
+	
 	String title;
 	String firstName;
 	private String lastName;
@@ -65,6 +67,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		titleComboBox.addItem("Dr");
 		titleComboBox.setMaximumSize(new Dimension(200,30));
 		
+		healthcareComboBox.addItem("No Plan");
 		healthcareComboBox.addItem("NHS Free Plan");
 		healthcareComboBox.addItem("Maintenance Plan");
 		healthcareComboBox.addItem("Oral Health Plan ");
@@ -104,7 +107,10 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		contactNo = this.getContactNoText();
 		healthCare = this.getHealthcareComboBox();
 		amountPaid = this.getAmountPaid();
-		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid));
+		checks = this.getChecks();
+		hyg = this.getHyg();
+		repa = this.getRepa();
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid,checks,hyg,repa));
 	}
 	public String getTitleComboBox() {
 		return (String) titleComboBox.getSelectedItem();
@@ -127,9 +133,42 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	public String getPostcodeText() {
 		return postcodeText.getText();
 	}
+	
 	public String getContactNoText() {
 		return contactNoText.getText();
 	}
+	
+	public int getChecks(){
+		if (!getHealthcareComboBox().equals("No Plan")){
+			return 2;
+			
+		}else{ 
+			return 0;
+		}	
+	}
+	
+	public int getHyg(){
+		if (getHealthcareComboBox().equals("No Plan")){
+			return 0;
+			
+		}else if (getHealthcareComboBox().equals("NHS Free Plan") || getHealthcareComboBox().equals("Maintenance Plan")){ 
+			return 2;
+		}	else{
+			return 4;
+		}
+	}
+	
+	public int getRepa(){
+		if (!getHealthcareComboBox().equals("Dental Repair Plan")){
+			return 0;
+			
+		}else{ 
+			return 2;
+		}	
+	}
+	
+	
+	
 	public BigDecimal getAmountPaid() {
 		BigDecimal bd = null;
 		if (getHealthcareComboBox().equals("NHS Free Plan")){

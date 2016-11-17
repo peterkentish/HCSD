@@ -1,7 +1,9 @@
-Daniel Kintish
+qwert qwert
 
 Your services:
-Check-up
+Hygiene
+Hygiene
+Hygiene
 
-Service Price: Â£45
-Your Price: Â£0
+Service Price: £45
+Your Price: £45.0
