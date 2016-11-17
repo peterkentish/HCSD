@@ -155,7 +155,7 @@ public class AfterInformationPanel extends JPanel {
 		
 		class submit implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				GenerateReceipt g = new GenerateReceipt();
+				GenerateReceipt g = new GenerateReceipt(AfterInformationPanel.this);
 				try {
 					ArrayList<String> services = new ArrayList<String>();
 					String fname = firstNameText.getText();

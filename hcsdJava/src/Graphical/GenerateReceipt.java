@@ -18,7 +18,7 @@ import Database.Patient;
 public class GenerateReceipt {
 	
 	private Formatter x;
-	
+	public AfterInformationPanel ai = new AfterInformationPanel();	
 	public void openFile(){
 		try{
 			x = new Formatter("Reciept.txt");
@@ -38,6 +38,9 @@ public class GenerateReceipt {
 	public void closeFile(){
 		x.close();
 	}
+	public GenerateReceipt(AfterInformationPanel pan){
+		this.ai = pan;
+	}
 	
 	public void writeFile(String price, String name, ArrayList<String> services) throws IOException{
         BufferedWriter writer = null;
@@ -46,7 +49,7 @@ public class GenerateReceipt {
             
             File logFile = new File("src/Graphical/Reciept.txt");
             Database db = new Database();
-            //AfterInformationPanel ai = new AfterInformationPanel();
+            AfterInformationPanel ai = new AfterInformationPanel();
 
             // This will output the full path where the file will be written to...
             writer = new BufferedWriter(new FileWriter(logFile));
@@ -66,7 +69,7 @@ public class GenerateReceipt {
             writer.write("Your Price: ");
             
             
-            Patient pat = ((Patient) db.selectPatient("*", "patients", "first_name='Daniel' and last_name='Kintish'"));
+            Patient pat = ((Patient) db.selectPatient("*", "patients", "first_name='"+ai.getFirstNameText() +"'and last_name='"+ai.getLastNameText()+"'"));
             double c1 = pat.getAmountPaid().doubleValue();
            double cost = Double.parseDouble(price);
             if(c1-cost< 0){

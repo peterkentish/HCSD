@@ -47,7 +47,7 @@ public class Database{
 	public Object selectPatient(String item, String table,String param){
 		selectQ = true;
 		query = "SELECT "+item+" FROM "+table+" WHERE "+param;
-		//System.out.println(query);
+		System.out.println(query);
 		this.table = table;
 		return excQuery(query);
 	}
