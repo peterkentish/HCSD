@@ -6,10 +6,14 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Formatter;
 
 import javax.swing.JFrame;
+
+import Database.Database;
+import Database.Patient;
 
 public class GenerateReceipt {
 	
@@ -41,7 +45,8 @@ public class GenerateReceipt {
             //create a temporary file
             
             File logFile = new File("src/Graphical/Reciept.txt");
-
+            Database db = new Database();
+            //AfterInformationPanel ai = new AfterInformationPanel();
 
             // This will output the full path where the file will be written to...
             writer = new BufferedWriter(new FileWriter(logFile));
@@ -55,9 +60,20 @@ public class GenerateReceipt {
             	writer.newLine();
             }
             writer.newLine();
-            writer.write("Price: ");
-            
+            writer.write("Service Price: ");
             writer.write("\u00a3"+price);
+            writer.newLine();
+            writer.write("Your Price: ");
+            
+            
+            Patient pat = ((Patient) db.selectPatient("*", "patients", "first_name='Daniel' and last_name='Kintish'"));
+            double c1 = pat.getAmountPaid().doubleValue();
+           double cost = Double.parseDouble(price);
+            if(c1-cost< 0){
+            	writer.write("\u00a3"+price);
+            }else{
+            writer.write("\u00a3"+"0");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

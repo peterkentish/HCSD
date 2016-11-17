@@ -83,6 +83,10 @@ public class Patient {
 		this.amountPaid = bigDecimal;
 	}
 	
+	public BigDecimal getAmountPaid(){
+		return amountPaid;
+	}
+	
 	public String toString() {
 		return String
 				.format("%s, %s ,%s, %s, %s, %s ,%s, %s, %s, %s \n",patientID,title, firstName,lastName,birthDate, streetAddress,postcode,contactNo, healthCare, amountPaid);

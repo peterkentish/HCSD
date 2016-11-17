@@ -36,17 +36,17 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		streetAddressText= new JTextField(20);
 		postcodeText= new JTextField(20);
 		contactNoText= new JTextField(20);
-		amountPaidText= new JTextField(20);
+		
 		
 		Dimension textDim = new Dimension(600,40); 
-		Dimension textDim1 = new Dimension(100,40);
+		
 		firstNameText.setMaximumSize(textDim);
 		lastNameText.setMaximumSize(textDim);
 		birthDateText.setMaximumSize(textDim);
 		streetAddressText.setMaximumSize(textDim);
 		postcodeText.setMaximumSize(textDim);
 		contactNoText.setMaximumSize(textDim);
-		amountPaidText.setMaximumSize(textDim1);
+		
 		
 		this.setLayout(new BoxLayout(this,1));
 		JLabel titleLabel = new JLabel("Title: ");
@@ -86,8 +86,6 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		this.add(contactNoText);
 		this.add(healthcareLabel);
 		this.add(healthcareComboBox);
-		this.add(amountPaidLabel);
-		this.add(amountPaidText);
 		JButton submit = new JButton("ADD PATIENT");
 		this.add(submit);
 		submit.addActionListener(this);
@@ -133,9 +131,18 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		return contactNoText.getText();
 	}
 	public BigDecimal getAmountPaid() {
+		BigDecimal bd = null;
+		if (getHealthcareComboBox().equals("NHS Free Plan")){
+			 bd = new BigDecimal(600);
+			
+		}else if(getHealthcareComboBox().equals("Maintenance Plan")){
+			bd = new BigDecimal(180);
+		}else if(getHealthcareComboBox().equals("Dental Repair Plan")){
+			 bd = new BigDecimal(400);
+		}else if(getHealthcareComboBox().equals("Oral Health Plan ")){
+			 bd = new BigDecimal(400);
+		}
 		
-		double val = Double.parseDouble(amountPaidText.getText()); 
-		BigDecimal bd = new BigDecimal(val);
 		return bd;
 	}
 
