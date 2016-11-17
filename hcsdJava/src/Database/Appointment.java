@@ -42,7 +42,6 @@ public class Appointment {
 				.format("%s, %s ,%s",startTime, endTime, patient_id);
 	}
 	public Date stringToDate(String s){
-		System.out.println("---------"+s);
 	  	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String startDateString = s;
 	    String newDateString= "";

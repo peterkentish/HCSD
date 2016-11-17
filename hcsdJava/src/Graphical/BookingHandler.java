@@ -27,7 +27,12 @@ public class BookingHandler implements ActionListener{
 		this.year = pan.getYear();
 		this.month = pan.getMonth();
 		this.day = pan.getDay();
-		this.staff = pan.getStaff();
+	
+		if (pan.getStaff().equals("Dentist")) {
+			this.staff = "dentist_appointments";
+		} else {
+			this.staff = "hygiene_appointments";
+		}
 		Database db = new Database();
 		
 		Patient pat = (Patient) db.selectPatient("*", "patients", "first_name='"+pan.getFirstNameText()+"' and last_name='"+pan.getLastNameText()+"' and birth_date='"
@@ -35,7 +40,12 @@ public class BookingHandler implements ActionListener{
 		int i = (pat.getPatientID());
 		String st = sqlFormatter(year, month, day, startTime);
 		String end = sqlFormatter(year, month, day, endTime);
-		db.bookDentistAppointment(st+","+end+","+i);
+		if (db.getAppointmentsBooked("appointment_start >= "+ st+" AND "+ "appointment_end <= "+end, staff)== null){
+			db.bookDentistAppointment(st+","+end+","+i, staff);
+		} else {
+			System.out.println("POOOOOO9045809530850498543098509345409853098");
+		}
+		
 		
 		
 		

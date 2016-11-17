@@ -65,7 +65,7 @@ public class CalendarPanelDay extends JPanel implements ActionListener {
 		setBackground(Color.WHITE);	
 		populateTimesOfDay();
 		getStartOfWeek(0);
-		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(today, staff);
+		apps = (ArrayList<Appointment>) db.getAppointmentsDay(today, staff);
 		JButton next = new JButton("Next");
 		next.addActionListener(this);
 		JButton back = new JButton("Back");

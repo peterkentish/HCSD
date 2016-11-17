@@ -27,13 +27,19 @@ public class Database{
 		selectQ= true;
 		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(weekCommencing)+" and "+dateFormatter(weekCommencing,7);
 		this.table = table;
-		System.out.println(query);
+
 		return excQuery(query);
 	}
 	
 	public Object getAppointmentsDay(Date day, String table){
 		selectQ= true;
 		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(day)+" and "+dateFormatter(day, 1);
+		this.table = table;
+		return excQuery(query);
+	}
+	public Object getAppointmentsBooked(String appt, String table){
+		selectQ= true;
+		query = "SELECT * FROM "+table+" WHERE "+appt;
 		this.table = table;
 		System.out.println(query);
 		return excQuery(query);
@@ -67,9 +73,9 @@ public class Database{
 		query = "DELETE FROM patients WHERE patient_id="+patient.getPatientID();
 		excQuery(query);
 	}
-	public void bookDentistAppointment(String booking){
+	public void bookDentistAppointment(String booking, String table){
 		selectQ = false;
-		query = "INSERT INTO dentist_appointments VALUES ("+booking+")";
+		query = "INSERT INTO "+table+" VALUES ("+booking+")";
 //		System.out.println(query);
 		excQuery(query);
 	}

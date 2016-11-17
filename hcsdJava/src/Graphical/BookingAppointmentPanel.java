@@ -98,6 +98,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 			}
 		}
 		startTimesComboBox.addActionListener(this);
+		endTimesComboBox.addActionListener(this);
 		Date todaysDate = new Date();
 		int yearToday = todaysDate.getYear()+1900;
 		int monthToday = todaysDate.getMonth()+1;
@@ -182,6 +183,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		if (combo.equals(yearComboBox)){
         	String selectedYear = (String)  combo.getSelectedItem();
         	currentYear = Integer.parseInt(selectedYear);
+        	currentMonth = Integer.parseInt((String) monthComboBox.getSelectedItem());
 		}
 		else if (combo.equals(monthComboBox)) {
 			String selectedMonth = (String) combo.getSelectedItem();
@@ -191,7 +193,8 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 			for (int i = startTimesComboBox.getSelectedIndex() +1;i<startTimesComboBox.getItemCount();i++){
 				endTimesComboBox.addItem(startTimesComboBox.getItemAt(i));
 			}
-		}
+			currentMonth = Integer.parseInt((String) monthComboBox.getSelectedItem());
+		} 
 		//switch to determine which months have how many days.
 			switch (currentMonth) {
 		        case 1:
@@ -222,9 +225,10 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		            break;
 			}
 			dayComboBox.removeAllItems();
+			System.out.println(currentMonth);
 			for (int i = 1; i <= daysInMonth;i++){
 				String x = Integer.toString(i);
-				Date dt = new Date(currentYear, currentMonth, i);
+				Date dt = new Date(currentYear, currentMonth+1, i);
 				int day = dt.getDay();
 				String dayName;
 				switch (day){
@@ -237,7 +241,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 					case 6: dayName = " Saturday";break;
 					default: dayName = " Fail";break;
 				}
-				
+
 				dayComboBox.addItem(x + dayName);
 			}
 
