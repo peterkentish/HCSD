@@ -3,6 +3,7 @@ package Graphical;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,7 +18,7 @@ import Database.Patient;
 public class RegistrationInformationPanel extends JPanel implements ActionListener {
 	private JComboBox<String> titleComboBox = new JComboBox<String>();
 	private JComboBox<String> healthcareComboBox = new JComboBox<String>();
-	private JTextField firstNameText,lastNameText,birthDateText,streetAddressText,postcodeText,contactNoText;
+	private JTextField firstNameText,lastNameText,birthDateText,streetAddressText,postcodeText,contactNoText, amountPaidText;
 	
 	String title;
 	String firstName;
@@ -27,6 +28,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	private String postcode;
 	private String contactNo;
 	private String healthCare;
+	private BigDecimal amountPaid;
 	public RegistrationInformationPanel(){
 		firstNameText= new JTextField(20);
 		lastNameText= new JTextField(20);
@@ -34,14 +36,17 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		streetAddressText= new JTextField(20);
 		postcodeText= new JTextField(20);
 		contactNoText= new JTextField(20);
+		amountPaidText= new JTextField(20);
 		
 		Dimension textDim = new Dimension(600,40); 
+		Dimension textDim1 = new Dimension(100,40);
 		firstNameText.setMaximumSize(textDim);
 		lastNameText.setMaximumSize(textDim);
 		birthDateText.setMaximumSize(textDim);
 		streetAddressText.setMaximumSize(textDim);
 		postcodeText.setMaximumSize(textDim);
 		contactNoText.setMaximumSize(textDim);
+		amountPaidText.setMaximumSize(textDim1);
 		
 		this.setLayout(new BoxLayout(this,1));
 		JLabel titleLabel = new JLabel("Title: ");
@@ -52,6 +57,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		JLabel postcodeLabel = new JLabel("Postcode: ");
 		JLabel contactNoLabel = new JLabel("ContactNo: ");
 		JLabel healthcareLabel = new JLabel("Healthcare plan: ");
+		JLabel amountPaidLabel = new JLabel("Amount Paid (£): ");
 		
 		titleComboBox.addItem("Mr");
 		titleComboBox.addItem("Mrs");
@@ -80,6 +86,8 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		this.add(contactNoText);
 		this.add(healthcareLabel);
 		this.add(healthcareComboBox);
+		this.add(amountPaidLabel);
+		this.add(amountPaidText);
 		JButton submit = new JButton("ADD PATIENT");
 		this.add(submit);
 		submit.addActionListener(this);
@@ -97,7 +105,8 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		postcode = this.getPostcodeText();
 		contactNo = this.getContactNoText();
 		healthCare = this.getHealthcareComboBox();
-		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare));
+		amountPaid = this.getAmountPaid();
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid));
 	}
 	public String getTitleComboBox() {
 		return (String) titleComboBox.getSelectedItem();
@@ -122,6 +131,12 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	}
 	public String getContactNoText() {
 		return contactNoText.getText();
+	}
+	public BigDecimal getAmountPaid() {
+		
+		double val = Double.parseDouble(amountPaidText.getText()); 
+		BigDecimal bd = new BigDecimal(val);
+		return bd;
 	}
 
 }
