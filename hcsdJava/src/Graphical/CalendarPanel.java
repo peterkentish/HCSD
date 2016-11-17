@@ -123,7 +123,6 @@ public class CalendarPanel extends JPanel implements ActionListener {
 			g.drawLine(xValue, 50, xValue, this.getHeight());
 		}
 		
-		System.out.println("PATIENT LENGTH "+patients.size());
 		for (int i=0;i<times.size();i++){
 			int yValue = 70+23*i;
 			g.drawString(timesString.get(i), 40, 70+23*i);
@@ -135,7 +134,8 @@ public class CalendarPanel extends JPanel implements ActionListener {
 						int apptLength = getDifference(appTimes.get(j),
 								appTimes.get(j + 1)) / 20;
 						for (int z = 0; z < apptLength; z++) {
-							g.drawString(patients.get(j/2).getFirstName(),
+							Patient p = patients.get(j/2);
+							g.drawString(p.getFirstName()+" "+p.getLastName(),
 									140 + (appTimes.get(j).getDay() - 1) * 210,
 									yValue + z * 23);
 						}

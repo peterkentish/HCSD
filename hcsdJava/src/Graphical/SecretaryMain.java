@@ -18,6 +18,7 @@ public class SecretaryMain extends DefaultFrame{
 		CalendarPanel hygieneCal = new CalendarPanel("hygiene_appointments");
 		RegistrationInformationPanel regPan = new RegistrationInformationPanel();
 		BookingAppointmentPanel bookPan = new BookingAppointmentPanel();
+		BookingHolidayPanel holPan = new BookingHolidayPanel();
 
 		
 		  setTitle("Secretary");
@@ -26,12 +27,14 @@ public class SecretaryMain extends DefaultFrame{
 		  
 		  jtp.addTab("Dentist Week Schedule", dentistCal);
 		  jtp.addTab("Hygiene Week Schedule", hygieneCal);
-		  jtp.addTab("Register a new Patient", regPan);
-		  jtp.addTab("Book another Appointment", bookPan);
+		  jtp.addTab("Register A New Patient", regPan);
+		  jtp.addTab("Book Another Appointment", bookPan);
+		  jtp.addTab("Book Staff Holiday",holPan);
           
 	}
 	public static void main(String[] args) {
 		JFrame x = new SecretaryMain();
+		x.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		x.setVisible(true);
 
 	}

@@ -20,8 +20,6 @@ public class BookingHandler implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		
 		this.startTime = pan.getStartTime();
 		this.endTime =pan.getEndTime();
 		this.year = pan.getYear();

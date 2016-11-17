@@ -8,7 +8,7 @@ import javax.swing.JTabbedPane;
 public class DentistMain extends DefaultFrame {
 	public DentistMain() {
 		
-		setTitle("Hygienist");
+		setTitle("Dentist");
 		Container contentPane = getContentPane();
 		AfterInformationPanel info = new AfterInformationPanel();
 		CalendarPanelDay dayP = new CalendarPanelDay("dentist_appointments");

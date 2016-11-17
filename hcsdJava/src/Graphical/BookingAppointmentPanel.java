@@ -128,7 +128,13 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		JLabel lastNameLabel = new JLabel("Surname: ");
 		JLabel birthDateLabel = new JLabel("Date of Birth: ");
 		JLabel postcodeLabel = new JLabel("Postcode: ");
-
+		JLabel stLabel = new JLabel ("Start time: ");
+		JLabel endLabel = new JLabel ("End time: ");
+		JLabel yrLabel = new JLabel ("Year: ");
+		JLabel mLabel = new JLabel ("Month: ");
+		JLabel dLabel = new JLabel ("Day: ");
+		JLabel smLabel = new JLabel ("Staff Member: ");
+		
 		success.setVisible(false);
 		failure.setVisible(false);
 		
@@ -147,12 +153,17 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		this.add(postcodeText);
 		
 		
-		
+		this.add(stLabel);
 		this.add(startTimesComboBox);
+		this.add(endLabel);
 		this.add(endTimesComboBox);
+		this.add(yrLabel);
 		this.add(yearComboBox);
+		this.add(mLabel);
 		this.add(monthComboBox);
+		this.add(dLabel);
 		this.add(dayComboBox);
+		this.add(smLabel);
 		this.add(staffMember);
 		this.add(success);
 		this.add(failure);
@@ -201,7 +212,9 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 				endTimesComboBox.addItem(startTimesComboBox.getItemAt(i));
 			}
 			currentMonth = Integer.parseInt((String) monthComboBox.getSelectedItem());
-		} 
+		} else {
+			currentMonth = Integer.parseInt((String) monthComboBox.getSelectedItem());
+		}
 		//switch to determine which months have how many days.
 			switch (currentMonth) {
 		        case 1:
