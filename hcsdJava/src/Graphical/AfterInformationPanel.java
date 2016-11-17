@@ -40,7 +40,6 @@ public class AfterInformationPanel extends JPanel {
 	private String postcode;
 	private String contactNo;
 	public AfterInformationPanel(){
-		JPanel panel = new JPanel();
 		firstNameText= new JTextField(20);
 		lastNameText= new JTextField(20);
 		JRadioButton yesButton   = new JRadioButton("Seen Patient", true);
@@ -125,10 +124,7 @@ public class AfterInformationPanel extends JPanel {
 				serviceComboBox2.setVisible(true);
 				button1.setVisible(false);
 				button2.setVisible(true);
-
-				
-				
-		
+				System.out.println(firstNameText.getText());
 			}
 		}
 		
@@ -186,9 +182,8 @@ public class AfterInformationPanel extends JPanel {
 					if(service1.equals("Amalgam filling")|| service2.equals("Amalgam filling")|| service3.equals("Amalgam filling")){
 						 price +=90;	
 					}
-					String name = fname + " " + sname;
 					String cost = Integer.toString(price);
-					g.writeFile(cost, name, services);
+					g.writeFile(cost, fname,sname, services);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -200,10 +195,7 @@ public class AfterInformationPanel extends JPanel {
 	
 		}
 
-	
-	public void actionPerformed(ActionEvent e) {
-		firstName = getFirstNameText();
-	}
+
 	public String getserviceComboBox() {
 		return (String) serviceComboBox1.getSelectedItem();
 	}

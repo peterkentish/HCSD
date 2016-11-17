@@ -42,11 +42,11 @@ public class GenerateReceipt {
 		this.ai = pan;
 	}
 	
-	public void writeFile(String price, String name, ArrayList<String> services) throws IOException{
+	public void writeFile(String price, String fname, String sname, ArrayList<String> services) throws IOException{
         BufferedWriter writer = null;
         try {
             //create a temporary file
-            
+            String name = fname +" "+ sname;
             File logFile = new File("src/Graphical/Reciept.txt");
             Database db = new Database();
             AfterInformationPanel ai = new AfterInformationPanel();
@@ -69,7 +69,7 @@ public class GenerateReceipt {
             writer.write("Your Price: ");
             
             
-            Patient pat = ((Patient) db.selectPatient("*", "patients", "first_name='"+ai.getFirstNameText() +"'and last_name='"+ai.getLastNameText()+"'"));
+            Patient pat = ((Patient) db.selectPatient("*", "patients", "first_name='"+fname +"'and last_name='"+sname+"'"));
             double c1 = pat.getAmountPaid().doubleValue();
            double cost = Double.parseDouble(price);
             if(c1-cost< 0){
