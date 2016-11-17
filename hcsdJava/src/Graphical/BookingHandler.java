@@ -42,13 +42,10 @@ public class BookingHandler implements ActionListener{
 		String end = sqlFormatter(year, month, day, endTime);
 		if (db.getAppointmentsBooked("appointment_start >= "+ st+" AND "+ "appointment_end <= "+end, staff)== null){
 			db.bookDentistAppointment(st+","+end+","+i, staff);
+			pan.getSuccess().setVisible(true);
 		} else {
-			System.out.println("POOOOOO9045809530850498543098509345409853098");
+			pan.getFailure().setVisible(true);
 		}
-		
-		
-		
-		
 		
 	}
 	public String sqlFormatter(String year, String month, String day, String time){
