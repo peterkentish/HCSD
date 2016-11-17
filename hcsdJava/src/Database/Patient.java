@@ -1,14 +1,18 @@
 package Database;
 
+import java.math.BigDecimal;
+
 public class Patient {
 	
 	private int patientID;
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
-	
-	public Patient(){
-		
+	private BigDecimal amountPaid;
+	public Patient() {
+		// TODO Auto-generated constructor stub
 	}
-	public Patient(String title, String firstName,String lastName,String birthDate,String streetAddress,String postcode, String contactNo, String healthcare){
+		
+	
+	public Patient(String title, String firstName,String lastName,String birthDate,String streetAddress,String postcode, String contactNo, String healthcare, BigDecimal amountPaid){
 		this.title= title;
 		this.firstName = firstName;
 		this.lastName=lastName;
@@ -17,6 +21,8 @@ public class Patient {
 		this.postcode = postcode;
 		this.contactNo = contactNo;
 		this.healthCare = healthcare;
+		this.amountPaid = amountPaid;
+		
 	}
 
 	public int getPatientID() {
@@ -73,13 +79,17 @@ public class Patient {
 	public void setHealthCare(String healthCare) {
 		this.healthCare = healthCare;
 	}
+	public void setAmountPaid(BigDecimal bigDecimal) {
+		this.amountPaid = bigDecimal;
+	}
+	
 	public String toString() {
 		return String
-				.format("%s, %s ,%s, %s, %s, %s ,%s, %s, %s \n",patientID,title, firstName,lastName,birthDate, streetAddress,postcode,contactNo, healthCare);
+				.format("%s, %s ,%s, %s, %s, %s ,%s, %s, %s, %s \n",patientID,title, firstName,lastName,birthDate, streetAddress,postcode,contactNo, healthCare, amountPaid);
 	}
 	public String toSQLString() {
 		return String
-				.format("'%s', '%s' ,'%s', '%s', '%s', '%s' ,'%s', '%s', '%s'",patientID,title, firstName,lastName, birthDate,streetAddress,postcode,contactNo, healthCare);
+				.format("'%s', '%s' ,'%s', '%s', '%s', '%s' ,'%s', '%s', '%s','%s'",patientID,title, firstName,lastName, birthDate,streetAddress,postcode,contactNo, healthCare, amountPaid);
 	}
 	
 }

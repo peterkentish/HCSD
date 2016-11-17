@@ -123,6 +123,8 @@ public class Database{
 		allRes.setPostcode(r.getString("postcode"));
 		allRes.setContactNo(r.getString("contact_no"));
 		allRes.setHealthCare(r.getString("healthcare"));
+		allRes.setAmountPaid( r.getBigDecimal ("amount_paid"));
+		
 		return allRes;
   }
   public ArrayList<Appointment> getAppointmentResults(ResultSet r) throws SQLException{

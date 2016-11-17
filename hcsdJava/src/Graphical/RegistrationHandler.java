@@ -2,6 +2,7 @@ package Graphical;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 import Database.Database;
 import Database.Patient;
@@ -9,6 +10,7 @@ public class RegistrationHandler implements ActionListener {
 	private int patientID;
 	private Database db = new Database();
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
+	private BigDecimal amountPaid;
 	private RegistrationInformationPanel info = new RegistrationInformationPanel();
 	public RegistrationHandler(RegistrationInformationPanel inf){
 		this.info = inf;
@@ -22,7 +24,7 @@ public class RegistrationHandler implements ActionListener {
 		postcode = info.getPostcodeText();
 		contactNo = info.getContactNoText();
 		healthCare = info.getHealthcareComboBox();
-		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare));
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid));
 		
 	}
 
