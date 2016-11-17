@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import Database.Database;
 import Database.Patient;
 public class RegistrationHandler implements ActionListener {
-	private int patientID;
+	private int patientID, checks, hyg, repa;
 	private Database db = new Database();
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
 	private BigDecimal amountPaid;
@@ -24,8 +24,11 @@ public class RegistrationHandler implements ActionListener {
 		postcode = info.getPostcodeText();
 		contactNo = info.getContactNoText();
 		healthCare = info.getHealthcareComboBox();
+		checks = info.getChecks();
+		hyg = info.getHyg();
+		repa = info.getRepa();
 		
-		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid));
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid,checks,hyg,repa));
 		
 	}
 

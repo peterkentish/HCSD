@@ -16,32 +16,32 @@ import Database.Database;
 import Database.Patient;
 
 public class GenerateReceipt {
-	
+
 	private Formatter x;
-	public AfterInformationPanel ai = new AfterInformationPanel();	
-	public void openFile(){
-		try{
+	public AfterInformationPanel ai = new AfterInformationPanel();
+
+	public void openFile() {
+		try {
 			x = new Formatter("Reciept.txt");
-			
-		}
-		catch (Exception e){
+
+		} catch (Exception e) {
 			System.out.println("Error");
 		}
-		
-		
+
 	}
-	
-	public void addReciept(){
+
+	public void addReciept() {
 		x.format("%s", "Hello");
 	}
-	
-	public void closeFile(){
+
+	public void closeFile() {
 		x.close();
 	}
+
 	public GenerateReceipt(AfterInformationPanel pan){
 		this.ai = pan;
 	}
-	
+
 	public void writeFile(String price, String fname, String sname, ArrayList<String> services) throws IOException{
         BufferedWriter writer = null;
         try {
@@ -70,13 +70,51 @@ public class GenerateReceipt {
             
             
             Patient pat = ((Patient) db.selectPatient("*", "patients", "first_name='"+fname +"'and last_name='"+sname+"'"));
-            double c1 = pat.getAmountPaid().doubleValue();
+           double c1 = pat.getAmountPaid().doubleValue();
            double cost = Double.parseDouble(price);
+           int checks = pat.getChecks();
+           for(int i = 0; i< services.size();i++){
+        	   if (checks > 0){
+        		   if(services.get(i).equals("Check-Up")){
+        			   cost -= 45;
+        			   checks--;
+        		   }
+        	   }
+           }
+           int hyg = pat.getHyg();	   
+           for(int x = 0; x< services.size();x++){
+        	   if (hyg > 0){
+        		   if(services.get(x).equals("Hygiene")){
+        			   cost -= 45;
+        			   hyg--;
+        			   
+        		   }
+        	   
+        	   }
+           }
+           int repa = pat.getRepa();
+           for(int x = 0; x< services.size();x++){
+        	   if (repa > 0){
+        		   if(services.get(x).equals("Amalgam filling")){
+        			   cost -= 90;
+        			   repa--;
+        		   }
+        	   
+        	   }
+           }
+           	
+           
+           
+            
+            writer.write("\u00a3"+cost);
+          
+            BigDecimal newVal =null;
             if(c1-cost< 0){
-            	writer.write("\u00a3"+price);
+            	newVal = new BigDecimal(0);
             }else{
-            writer.write("\u00a3"+"0");
+            	newVal = new BigDecimal(c1 -cost);
             }
+            db.updatePatient("patients","check_up ='"+checks+"'hygiene_visit ='"+ hyg+ "' repair ='"+repa+"'" , "first_name='"+fname +"'and last_name='"+sname+"'");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -86,9 +124,9 @@ public class GenerateReceipt {
             } catch (Exception e) {
             }
         }
+
 	}
+}
 
 		
-	}
-
-
+	
