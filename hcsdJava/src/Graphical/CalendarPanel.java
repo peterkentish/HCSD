@@ -42,6 +42,8 @@ public class CalendarPanel extends JPanel implements ActionListener {
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		weekStart = c.getTime();
 		int weekStartInt = weekStart.getDate();
+		weekStart.setHours(1);
+		weekStart.setMinutes(1);
 		if (i!=0){
 			weekStart.setDate(i);
 		}

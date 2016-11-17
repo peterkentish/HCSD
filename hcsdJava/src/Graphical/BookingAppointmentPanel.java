@@ -46,7 +46,8 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	private JComboBox<String> dayComboBox = new JComboBox<String>();
 	private JComboBox<String> yearComboBox = new JComboBox<String>();
 	private JComboBox<String> monthComboBox = new JComboBox<String>();
-	
+	JLabel success = new JLabel("Booking Successful!!");
+	JLabel failure = new JLabel("Booking Failed, appointment time taken");
 	
 	public BookingAppointmentPanel(){
 		populateTimesOfDay();
@@ -127,6 +128,10 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		JLabel lastNameLabel = new JLabel("Surname: ");
 		JLabel birthDateLabel = new JLabel("Date of Birth: ");
 		JLabel postcodeLabel = new JLabel("Postcode: ");
+
+		success.setVisible(false);
+		failure.setVisible(false);
+		
 		
 		idLabel = new JLabel(patientID.toString());
 		idLabel.setVisible(false);
@@ -149,6 +154,8 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		this.add(monthComboBox);
 		this.add(dayComboBox);
 		this.add(staffMember);
+		this.add(success);
+		this.add(failure);
 		
 		JButton makeBooking = new JButton("Book Appointment");
 		makeBooking.addActionListener(new BookingHandler(this));
@@ -278,6 +285,12 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	}
 	public String getStaff(){
 		return (String) staffMember.getSelectedItem();
+	}
+	public JLabel getSuccess(){
+		return success;
+	}
+	public JLabel getFailure(){
+		return failure;
 	}
 	
 }

@@ -26,6 +26,7 @@ public class Database{
 	public Object getAppointmentsWeek(Date weekCommencing, String table){
 		selectQ= true;
 		query = "SELECT * FROM "+table+" WHERE appointment_start BETWEEN "+sqlFormatter(weekCommencing)+" and "+dateFormatter(weekCommencing,7);
+		System.out.println(query);
 		this.table = table;
 
 		return excQuery(query);
