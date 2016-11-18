@@ -1,9 +1,8 @@
-rt rt
+qw qw
 
 Your services:
+Check-up
 Amalgam filling
-Hygiene
-Hygiene
 
 Service Price: £135
-Your Price: £90.0
+Your Price: £135.0

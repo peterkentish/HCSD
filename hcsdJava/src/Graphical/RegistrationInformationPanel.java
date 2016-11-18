@@ -110,7 +110,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		checks = this.getChecks();
 		hyg = this.getHyg();
 		repa = this.getRepa();
-		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid,checks,hyg,repa));
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,checks,hyg,repa));
 	}
 	public String getTitleComboBox() {
 		return (String) titleComboBox.getSelectedItem();

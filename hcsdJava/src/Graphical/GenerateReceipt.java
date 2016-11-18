@@ -70,7 +70,6 @@ public class GenerateReceipt {
             
             
             Patient pat = ((Patient) db.selectPatient("*", "patients", "first_name='"+fname +"'and last_name='"+sname+"'"));
-           double c1 = pat.getAmountPaid().doubleValue();
            double cost = Double.parseDouble(price);
            int checks = pat.getChecks();
            System.out.println(checks);
@@ -109,12 +108,7 @@ public class GenerateReceipt {
             
             writer.write("\u00a3"+cost);
           
-            BigDecimal newVal =null;
-            if(c1-cost< 0){
-            	newVal = new BigDecimal(0);
-            }else{
-            	newVal = new BigDecimal(c1 -cost);
-            }
+            
             db.updatePatient("patients","check_up ='"+checks+"', hygiene_visit ='"+ hyg+ "', repair ='"+repa+"'" , "first_name='"+fname +"'and last_name='"+sname+"'");
         } catch (Exception e) {
             e.printStackTrace();
