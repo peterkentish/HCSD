@@ -73,6 +73,7 @@ public class GenerateReceipt {
            double c1 = pat.getAmountPaid().doubleValue();
            double cost = Double.parseDouble(price);
            int checks = pat.getChecks();
+           System.out.println(checks);
            for(int i = 0; i< services.size();i++){
         	   if (checks > 0){
         		   if(services.get(i).equals("Check-Up")){
@@ -114,7 +115,7 @@ public class GenerateReceipt {
             }else{
             	newVal = new BigDecimal(c1 -cost);
             }
-            db.updatePatient("patients","check_up ='"+checks+"'hygiene_visit ='"+ hyg+ "' repair ='"+repa+"'" , "first_name='"+fname +"'and last_name='"+sname+"'");
+            db.updatePatient("patients","check_up ='"+checks+"', hygiene_visit ='"+ hyg+ "', repair ='"+repa+"'" , "first_name='"+fname +"'and last_name='"+sname+"'");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
