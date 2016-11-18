@@ -10,7 +10,6 @@ public class RegistrationHandler implements ActionListener {
 	private int patientID, checks, hyg, repa;
 	private Database db = new Database();
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
-	private BigDecimal amountPaid;
 	private RegistrationInformationPanel info = new RegistrationInformationPanel();
 	public RegistrationHandler(RegistrationInformationPanel inf){
 		this.info = inf;
@@ -28,7 +27,7 @@ public class RegistrationHandler implements ActionListener {
 		hyg = info.getHyg();
 		repa = info.getRepa();
 		
-		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,amountPaid,checks,hyg,repa));
+		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,checks,hyg,repa));
 		
 	}
 

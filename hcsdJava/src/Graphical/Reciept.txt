@@ -1,7 +1,8 @@
-w w
+qw qw
 
 Your services:
 Check-up
+Amalgam filling
 
-Service Price: £45
-Your Price: £45.0
+Service Price: £135
+Your Price: £135.0
