@@ -140,8 +140,8 @@ public class Database{
 		allRes.setHealthCare(r.getString("healthcare"));
 		allRes.setAmountPaid( r.getBigDecimal ("amount_paid"));
 		allRes.setChecks(r.getInt("check_up"));
-		allRes.setChecks(r.getInt("hygiene_visit"));
-		allRes.setChecks(r.getInt("repair"));
+		allRes.setHyg(r.getInt("hygiene_visit"));
+		allRes.setRepo(r.getInt("repair"));
 		
 		return allRes;
   }

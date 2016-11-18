@@ -1,7 +1,9 @@
-w w
+rt rt
 
 Your services:
-Check-up
+Amalgam filling
+Hygiene
+Hygiene
 
-Service Price: £45
-Your Price: £45.0
+Service Price: £135
+Your Price: £90.0
