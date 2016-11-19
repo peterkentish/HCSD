@@ -31,6 +31,8 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	private String contactNo;
 	private String healthCare;
 	private BigDecimal amountPaid;
+	JLabel success = new JLabel("Registration Successful");
+	JLabel failure = new JLabel ("Registration Failed, please check user details");
 	public RegistrationInformationPanel(){
 		firstNameText= new JTextField(20);
 		lastNameText= new JTextField(20);
@@ -59,7 +61,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		JLabel postcodeLabel = new JLabel("Postcode: ");
 		JLabel contactNoLabel = new JLabel("ContactNo: ");
 		JLabel healthcareLabel = new JLabel("Healthcare plan: ");
-		JLabel amountPaidLabel = new JLabel("Amount Paid (£): ");
+		JLabel amountPaidLabel = new JLabel("Amount Paid (ï¿½): ");
 		
 		titleComboBox.addItem("Mr");
 		titleComboBox.addItem("Mrs");
@@ -93,6 +95,11 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		this.add(submit);
 		submit.addActionListener(this);
 		submit.setMaximumSize(new Dimension(200,40));
+		this.add(success);
+		this.add(failure);
+		
+		success.setVisible(false);
+		failure.setVisible(false);
 		
 	}
 	@Override
@@ -110,8 +117,15 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		checks = this.getChecks();
 		hyg = this.getHyg();
 		repa = this.getRepa();
+		int startCount = db.getPatientCount();
+		System.out.println(startCount);
 		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,checks,hyg,repa));
+		if (db.getPatientCount()== startCount+1){
+			this.getSuccess().setVisible(true);
+		}else 
+			this.getFailure().setVisible(true);
 	}
+	
 	public String getTitleComboBox() {
 		return (String) titleComboBox.getSelectedItem();
 	}
@@ -169,6 +183,18 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	
 	
 	
+	public JLabel getSuccess() {
+		return success;
+	}
+	public JLabel getFailure() {
+		return failure;
+	}
+	public void setSuccess(JLabel success) {
+		this.success = success;
+	}
+	public void setFailure(JLabel failure) {
+		this.failure = failure;
+	}
 	public BigDecimal getAmountPaid() {
 		BigDecimal bd = null;
 		if (getHealthcareComboBox().equals("NHS Free Plan")){

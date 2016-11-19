@@ -45,6 +45,12 @@ public class Database{
 		System.out.println(query);
 		return excQuery(query);
 	}
+	public int getPatientCount(){
+		selectQ = true;
+		//Potential issue
+		query = "SELECT COUNT(*) AS total FROM patients";
+		return (int) excQuery(query);
+	}
 	public Object selectPatient(String item, String table,String param){
 		selectQ = true;
 		query = "SELECT "+item+" FROM "+table+" WHERE "+param;
@@ -112,6 +118,8 @@ public class Database{
 	    		result = getPatientResults(rs);
 	    	  }else if (table=="dentist_appointments" || table == "hygiene_appointments"){
 				result = getAppointmentResults(rs);
+	    	  } else if(query.substring(0,12).equals("SELECT COUNT")){
+	    		  result = getCount(rs);
 	    	  }
       }} else {
     	  st.executeUpdate(query);
@@ -155,6 +163,9 @@ public class Database{
 	  	} while  (r.next());
 		return apps;
 }
+  public int getCount(ResultSet r) throws SQLException{
+	   return r.getInt("total");
+  }
   public String dateFormatter(Date weekCommencing,int daysToAdd){
 	  	Date newDate = new Date(weekCommencing.getYear(), weekCommencing.getMonth(), weekCommencing.getDate(),weekCommencing.getHours(),weekCommencing.getMinutes());
 	  	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
@@ -170,7 +181,7 @@ public class Database{
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
-	   
+
 	   
 	  return sqlFormatter(newerDate);
   }

@@ -26,9 +26,14 @@ public class RegistrationHandler implements ActionListener {
 		checks = info.getChecks();
 		hyg = info.getHyg();
 		repa = info.getRepa();
-		
+		System.out.println(")ODJASHOSDJOASIJOSISADOIJDSAOISJAOISDJOISDAJASODIJ");
+		int startCount = db.getPatientCount();
+		System.out.println(startCount);
 		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,checks,hyg,repa));
-		
+		if (db.getPatientCount()== startCount+1){
+			info.getSuccess().setVisible(true);
+		}else 
+			info.getFailure().setVisible(true);
 	}
 
 }
