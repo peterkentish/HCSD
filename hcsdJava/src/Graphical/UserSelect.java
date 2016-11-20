@@ -35,7 +35,6 @@ public class UserSelect extends DefaultFrame  {
 				JFrame x = new DentistMain();
 				x.setVisible(true);
 				setVisible(false);
-				
 			}
 		}
 	button2.addActionListener(new button2());

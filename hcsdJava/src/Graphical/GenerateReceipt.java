@@ -73,9 +73,11 @@ public class GenerateReceipt {
            double cost = Double.parseDouble(price);
            int checks = pat.getChecks();
            System.out.println(checks);
+           
            for(int i = 0; i< services.size();i++){
+        	   System.out.println(services.get(i));
         	   if (checks > 0){
-        		   if(services.get(i).equals("Check-Up")){
+        		   if(services.get(i).equals("Check-up")){
         			   cost -= 45;
         			   checks--;
         		   }
@@ -102,11 +104,31 @@ public class GenerateReceipt {
         	   
         	   }
            }
+           
+           for(int x = 0; x< services.size();x++){
+        	   if (repa > 0){
+        		   if(services.get(x).equals(("White composite resin filling"))){
+        			   cost -= 150;
+        			   repa--;
+        		   }
+        	   
+        	   }
+           }
+           for(int x = 0; x< services.size();x++){
+        	   if (repa > 0){
+        		   if(services.get(x).equals(("Gold crown"))){
+        			   cost -= 500;
+        			   repa--;
+        		   }
+        	   
+        	   }
+           }
+
            	
            
            
             
-            writer.write("\u00a3"+cost);
+            writer.write("\u00a3"+cost+"0");
           
             
             db.updatePatient("patients","check_up ='"+checks+"', hygiene_visit ='"+ hyg+ "', repair ='"+repa+"'" , "first_name='"+fname +"'and last_name='"+sname+"'");

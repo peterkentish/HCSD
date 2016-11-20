@@ -70,18 +70,24 @@ public class AfterInformationPanel extends JPanel {
 		serviceComboBox1.addItem("Hygiene");
 		serviceComboBox1.addItem("Check-up");
 		serviceComboBox1.addItem("Amalgam filling");
+		serviceComboBox1.addItem("White composite resin filling");
+		serviceComboBox1.addItem("Gold crown");
 		serviceComboBox1.setMaximumSize(new Dimension(200,30));
 		
 		serviceComboBox2.addItem("No Service");
 		serviceComboBox2.addItem("Hygiene");
 		serviceComboBox2.addItem("Check-up");
 		serviceComboBox2.addItem("Amalgam filling");
+		serviceComboBox2.addItem("White composite resin filling");
+		serviceComboBox2.addItem("Gold crown");
 		serviceComboBox2.setMaximumSize(new Dimension(200,30));
 		
 		serviceComboBox3.addItem("No Service");
 		serviceComboBox3.addItem("Hygiene");
 		serviceComboBox3.addItem("Check-up");
 		serviceComboBox3.addItem("Amalgam filling");
+		serviceComboBox3.addItem("White composite resin filling");
+		serviceComboBox3.addItem("Gold crown");
 		serviceComboBox3.setMaximumSize(new Dimension(200,30));
 
 					
@@ -136,12 +142,7 @@ public class AfterInformationPanel extends JPanel {
 
 				serviceLabel3.setVisible(true);
 				serviceComboBox3.setVisible(true);
-				button2.setVisible(false);
-
-
-				
-				
-		
+				button2.setVisible(false);	
 			}
 		}
 		
@@ -181,6 +182,12 @@ public class AfterInformationPanel extends JPanel {
 					}
 					if(service1.equals("Amalgam filling")|| service2.equals("Amalgam filling")|| service3.equals("Amalgam filling")){
 						 price +=90;	
+					}
+					if(service1.equals("White composite resin filling")|| service2.equals("White composite resin filling")|| service3.equals("White composite resin filling")){
+						 price +=150;
+					}
+					if(service1.equals("Gold crown")|| service2.equals("Gold crown")|| service3.equals("Gold crown")){
+						 price +=500;
 					}
 					String cost = Integer.toString(price);
 					g.writeFile(cost, fname,sname, services);

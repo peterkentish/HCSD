@@ -1,8 +1,9 @@
-qw qw
+poiu poiu
 
 Your services:
-Check-up
 Amalgam filling
+White composite resin filling
+Gold crown
 
-Service Price: £135
-Your Price: £135.0
+Service Price: £740
+Your Price: £650.00
