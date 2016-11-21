@@ -162,7 +162,7 @@ public class AfterInformationPanel extends JPanel {
 					String service1  = serviceComboBox1.getSelectedItem().toString();
 					String service2  = serviceComboBox2.getSelectedItem().toString();
 					String service3  = serviceComboBox3.getSelectedItem().toString();
-					String comment = commentText.getSelectedText(); 
+					String comment = commentText.getText(); 
 					//set price to 0 then add price of service
 					int price = 0;
 					//add all selected services to array list to be printed on reciept
