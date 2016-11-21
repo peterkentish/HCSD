@@ -15,6 +15,10 @@ import javax.swing.JFrame;
 import Database.Database;
 import Database.Patient;
 
+/*
+ * This class generates a receipt from data the dentist
+ * or hygienist entered in the after patient form
+ */
 public class GenerateReceipt {
 
 	private Formatter x;

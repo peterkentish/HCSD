@@ -6,8 +6,7 @@ public class Patient {
 	
 	private int patientID;
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
-	private int checks, hyg, repa; 
-	private BigDecimal amountPaid;
+	private int checks, hyg, repa;
 	public Patient() {
 		// TODO Auto-generated constructor stub
 	}

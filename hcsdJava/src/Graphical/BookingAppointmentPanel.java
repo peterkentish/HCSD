@@ -21,7 +21,9 @@ import javax.swing.JTextField;
 
 import Database.Database;
 import Database.Patient;
-
+/*
+ * this class allows the secretary to book an appointment 
+ */
 public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	ArrayList<String> timesString = new ArrayList<String>();
 	List<java.sql.Time> times = new ArrayList<>();
