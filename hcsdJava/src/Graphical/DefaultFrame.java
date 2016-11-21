@@ -7,14 +7,16 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-
+// this is the super class all gui will inherit to  window settings  
 public class DefaultFrame extends JFrame {
 	public DefaultFrame(){
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		//blue background
 		setBackground(Color.blue);
-		Dimension screenDimensions = toolkit.getScreenSize();
-		setSize(1200, 800);		
+		//standard windo size
+		setSize(1200, 800);	
+		//where on screen
 		setLocation(new Point(50,0));
+		//stop running on close
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}

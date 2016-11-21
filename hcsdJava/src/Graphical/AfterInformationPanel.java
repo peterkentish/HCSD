@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 
 public class AfterInformationPanel extends JPanel {
 	
-	
+	//Initialising variables 
 	private JComboBox<String> serviceComboBox1 = new JComboBox<String>();
 	private JComboBox<String> serviceComboBox2 = new JComboBox<String>();
 	private JComboBox<String> serviceComboBox3 = new JComboBox<String>();
@@ -40,6 +40,7 @@ public class AfterInformationPanel extends JPanel {
 	private String postcode;
 	private String contactNo;
 	public AfterInformationPanel(){
+		//set text boxes 
 		firstNameText= new JTextField(20);
 		lastNameText= new JTextField(20);
 		JRadioButton yesButton   = new JRadioButton("Seen Patient", true);
@@ -65,7 +66,7 @@ public class AfterInformationPanel extends JPanel {
 		JLabel serviceLabel1 = new JLabel("Service: ");
 		JLabel serviceLabel2 = new JLabel("Service: ");
 		JLabel serviceLabel3 = new JLabel("Service: ");
-
+		//drop down list of services
 		serviceComboBox1.addItem("No Service");
 		serviceComboBox1.addItem("Hygiene");
 		serviceComboBox1.addItem("Check-up");
@@ -122,7 +123,7 @@ public class AfterInformationPanel extends JPanel {
 		serviceComboBox3.setVisible(false);
 
 
-		
+		// if add service selected show another drop down menu and show another add service 
 		class button1 implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 
@@ -149,19 +150,22 @@ public class AfterInformationPanel extends JPanel {
 		button2.addActionListener(new button2());
 		JButton submit = new JButton("ADD PATIENT");
 		this.add(submit);
-		
+		//when add patient selected
 		class submit implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				GenerateReceipt g = new GenerateReceipt(AfterInformationPanel.this);
 				try {
+					//get selected items in combo boxes and text boxes
 					ArrayList<String> services = new ArrayList<String>();
 					String fname = firstNameText.getText();
 					String sname = lastNameText.getText();
 					String service1  = serviceComboBox1.getSelectedItem().toString();
 					String service2  = serviceComboBox2.getSelectedItem().toString();
 					String service3  = serviceComboBox3.getSelectedItem().toString();
-					System.out.println(service3);
+					String comment = commentText.getSelectedText(); 
+					//set price to 0 then add price of service
 					int price = 0;
+					//add all selected services to array list to be printed on reciept
 					if(!service1.equals("No Service")){
 						services.add(service1);
 						
@@ -174,6 +178,8 @@ public class AfterInformationPanel extends JPanel {
 						services.add(service3);
 						
 					}
+					
+					// add price of service
 					if(service1.equals("Hygiene")|| service2.equals("Hygiene")|| service3.equals("Hygiene")){
 						 price +=45;	
 					}
@@ -189,8 +195,10 @@ public class AfterInformationPanel extends JPanel {
 					if(service1.equals("Gold crown")|| service2.equals("Gold crown")|| service3.equals("Gold crown")){
 						 price +=500;
 					}
+					//change type to int to allow calculations in next class
 					String cost = Integer.toString(price);
-					g.writeFile(cost, fname,sname, services);
+					//call function to write on receipt 
+					g.writeFile(cost, fname,sname, services, comment);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -201,18 +209,6 @@ public class AfterInformationPanel extends JPanel {
 	
 	
 		}
-
-
-	public String getserviceComboBox() {
-		return (String) serviceComboBox1.getSelectedItem();
-	}
-	public String getFirstNameText() {
-		return firstNameText.getText();
-	}
-	public String getLastNameText() {
-		return lastNameText.getText();
-	}
-	
 	
 
 }
