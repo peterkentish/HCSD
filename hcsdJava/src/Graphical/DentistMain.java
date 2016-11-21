@@ -7,7 +7,6 @@ import javax.swing.JTabbedPane;
 
 public class DentistMain extends DefaultFrame {
 	public DentistMain() {
-		
 		setTitle("Dentist");
 		Container contentPane = getContentPane();
 		AfterInformationPanel info = new AfterInformationPanel();
