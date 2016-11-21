@@ -2,7 +2,10 @@ package Graphical;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
+
+/*
+ * this class obtains all relevant data and adds to database
+ */
 
 import Database.Database;
 import Database.Patient;
@@ -26,9 +29,8 @@ public class RegistrationHandler implements ActionListener {
 		checks = info.getChecks();
 		hyg = info.getHyg();
 		repa = info.getRepa();
-		System.out.println(")ODJASHOSDJOASIJOSISADOIJDSAOISJAOISDJOISDAJASODIJ");
 		int startCount = db.getPatientCount();
-		System.out.println(startCount);
+		//insert into database
 		db.addPatient(new Patient(title, firstName, lastName, birthDate, streetAddress, postcode, contactNo,healthCare,checks,hyg,repa));
 		if (db.getPatientCount()== startCount+1){
 			info.getSuccess().setVisible(true);

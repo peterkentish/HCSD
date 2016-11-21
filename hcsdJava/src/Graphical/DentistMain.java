@@ -4,7 +4,10 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-
+/*
+ * dentist window where the user can select tabs for day or week schedule and the after patient form.
+ * the tables call the relevant panel
+ */
 public class DentistMain extends DefaultFrame {
 	public DentistMain() {
 		setTitle("Dentist");
