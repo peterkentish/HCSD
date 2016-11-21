@@ -11,10 +11,12 @@ public class DentistMain extends DefaultFrame {
 		setTitle("Dentist");
 		Container contentPane = getContentPane();
 		AfterInformationPanel info = new AfterInformationPanel();
+		CalendarPanel weekP = new CalendarPanel("dentist_appointments");
 		CalendarPanelDay dayP = new CalendarPanelDay("dentist_appointments");
 		JTabbedPane jtp = new JTabbedPane();
 		contentPane.add(jtp);
 		jtp.addTab("Day Schedule", dayP);
+		jtp.addTab("Week Schedule", weekP);
 		jtp.addTab("After Patient Form", info);
 	}
 
@@ -22,5 +24,4 @@ public class DentistMain extends DefaultFrame {
 		JFrame x = new DentistMain();
 		x.setVisible(true);
 	}
-
 }
