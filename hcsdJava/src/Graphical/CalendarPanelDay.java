@@ -22,6 +22,13 @@ import javax.swing.JPanel;
 import Database.Appointment;
 import Database.Database;
 import Database.Patient;
+/*
+ * A calendar which uses graphics 2D to produce a table, with 1 columns.
+ * the first column being the time in 20 mintue intervals, the other being
+ * the day of the week. It then populates these
+ * with the data from the database for each day and time segment. 
+ * for extensive comments see CalendarPanel as it is based off of that 
+ */
 
 public class CalendarPanelDay extends JPanel implements ActionListener {
 	
