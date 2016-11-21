@@ -15,7 +15,11 @@ import javax.swing.JTextField;
 import Database.Database;
 import Database.Patient;
 
+/*
+ * This class takes all inputs from window and inserts patient record into the database 
+ */
 public class RegistrationInformationPanel extends JPanel implements ActionListener {
+	// initiate variables
 	private JComboBox<String> titleComboBox = new JComboBox<String>();
 	private JComboBox<String> healthcareComboBox = new JComboBox<String>();
 	private JTextField firstNameText,lastNameText,birthDateText,streetAddressText,postcodeText,contactNoText, amountPaidText;
@@ -61,7 +65,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		JLabel postcodeLabel = new JLabel("Postcode: ");
 		JLabel contactNoLabel = new JLabel("ContactNo: ");
 		JLabel healthcareLabel = new JLabel("Healthcare plan: ");
-		JLabel amountPaidLabel = new JLabel("Amount Paid (�): ");
+		//displaying items on window
 		
 		titleComboBox.addItem("Mr");
 		titleComboBox.addItem("Mrs");
@@ -103,6 +107,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		
 	}
 	@Override
+	//inserting items to database
 	public void actionPerformed(ActionEvent e) {
 		Database db = new Database();
 		title= this.getTitleComboBox();

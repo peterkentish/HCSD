@@ -24,7 +24,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
+/*
+ * this class allows the dentist or hygienist to enter information
+ * about what the patient did it links to the receipt and updates the database
+ */
 public class AfterInformationPanel extends JPanel {
 	
 	//Initialising variables 
