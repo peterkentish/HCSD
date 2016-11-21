@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import Graphical.CalendarPanel;
-
+// an appointment object with a start time end time and patient ID to identify the patient.
 public class Appointment {
 	public String startTime;
 	public String endTime;
@@ -17,7 +17,6 @@ public class Appointment {
 		this.patient_id = patientID;
 	}
 	public Appointment(){
-		
 	}
 	public String getStartTime() {
 		return startTime;
