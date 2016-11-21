@@ -21,15 +21,16 @@ import javax.swing.JTextField;
 
 import Database.Database;
 import Database.Patient;
+
 //the panel that is used by the secretary to book holidays for the partners
 public class BookingHolidayPanel extends JPanel implements ActionListener {
-	//start variables
+	// start variables
 	ArrayList<String> timesString = new ArrayList<String>();
 	List<java.sql.Time> times = new ArrayList<>();
 	JComboBox<String> startTimesComboBox = new JComboBox<>();
 	JComboBox<String> endTimesComboBox = new JComboBox<>();
 	JComboBox<String> staffMember = new JComboBox<>();
-	
+
 	private int currentMonth;
 	private int currentYear;
 	private int daysInMonth = 31;
@@ -38,85 +39,101 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 	private JComboBox<String> monthComboBox = new JComboBox<String>();
 	JLabel success = new JLabel("Booking Successful!!");
 	JLabel failure = new JLabel("Booking Failed, appointment time taken");
-	//constructor that initialises the combo boxes with the relevant infomation for that month
-	public BookingHolidayPanel(){
+
+	// constructor that initialises the combo boxes with the relevant infomation
+	// for that month
+	public BookingHolidayPanel() {
 		populateTimesOfDay();
-		yearComboBox.setMaximumSize(new Dimension(200,30));
-		monthComboBox.setMaximumSize(new Dimension(200,30));
-		dayComboBox.setMaximumSize(new Dimension(200,30));
-		
+		yearComboBox.setMaximumSize(new Dimension(200, 30));
+		monthComboBox.setMaximumSize(new Dimension(200, 30));
+		dayComboBox.setMaximumSize(new Dimension(200, 30));
+
 		yearComboBox.addItem("2016");
 		yearComboBox.addItem("2017");
 		yearComboBox.addItem("2018");
-		
+
 		staffMember.addItem("Dentist");
 		staffMember.addItem("Hygienist");
-		
-		//for each day get the correct day name in the currently selected month
-		for (int i = 1; i <= daysInMonth;i++){
+
+		// for each day get the correct day name in the currently selected month
+		for (int i = 1; i <= daysInMonth; i++) {
 			String x = Integer.toString(i);
 			Date dt = new Date(currentYear, currentMonth, i);
 			int day = dt.getDay();
 			String dayName;
-			switch (day+1){
-				case 7: dayName = " Sunday";break;
-				case 1: dayName = " Monday";break;
-				case 2: dayName = " Tuesday";break;
-				case 3: dayName = " Wednesday";break;
-				case 4: dayName = " Thursday";break;
-				case 5: dayName = " Friday";break;
-				case 6: dayName = " Saturday";break;
-				default: dayName = " Fail";break;
+			switch (day + 1) {
+			case 7:
+				dayName = " Sunday";
+				break;
+			case 1:
+				dayName = " Monday";
+				break;
+			case 2:
+				dayName = " Tuesday";
+				break;
+			case 3:
+				dayName = " Wednesday";
+				break;
+			case 4:
+				dayName = " Thursday";
+				break;
+			case 5:
+				dayName = " Friday";
+				break;
+			case 6:
+				dayName = " Saturday";
+				break;
+			default:
+				dayName = " Fail";
+				break;
 			}
-			dayComboBox.addItem(x+dayName);
+			dayComboBox.addItem(x + dayName);
 		}
-	
-		for (int i = 1; i < 13;i++){
+
+		for (int i = 1; i < 13; i++) {
 			String x = Integer.toString(i);
 			monthComboBox.addItem(x);
 		}
-		//for the times, add the start and end times
-		for (int i=0;i<times.size();i++){
+		// for the times, add the start and end times
+		for (int i = 0; i < times.size(); i++) {
 			startTimesComboBox.addItem(timesString.get(i));
-			if(i>=1){
+			if (i >= 1) {
 				endTimesComboBox.addItem(timesString.get(i));
 			}
 		}
-		
-		
-		// the following is gui setup 
+
+		// the following is gui setup
 		startTimesComboBox.addActionListener(this);
 		endTimesComboBox.addActionListener(this);
 		Date todaysDate = new Date();
-		int yearToday = todaysDate.getYear()+1900;
-		int monthToday = todaysDate.getMonth()+1;
-		int dayToday = todaysDate.getDate() -1;
+		int yearToday = todaysDate.getYear() + 1900;
+		int monthToday = todaysDate.getMonth() + 1;
+		int dayToday = todaysDate.getDate() - 1;
 		String todaysYear = Integer.toString(yearToday);
 		String todaysMonth = Integer.toString(monthToday);
 		String todaysDay = Integer.toString(dayToday);
-		
+
 		yearComboBox.setSelectedItem(todaysYear);
 		monthComboBox.setSelectedItem(todaysMonth);
 		dayComboBox.setSelectedItem(todaysDay);
 		yearComboBox.addActionListener(this);
 		monthComboBox.addActionListener(this);
-		startTimesComboBox.setMaximumSize(new Dimension(200,30));
-		endTimesComboBox.setMaximumSize(new Dimension(200,30));
-		
-		staffMember.setMaximumSize(new Dimension(200,30));
-		
-		this.setLayout(new BoxLayout(this,1));
+		startTimesComboBox.setMaximumSize(new Dimension(200, 30));
+		endTimesComboBox.setMaximumSize(new Dimension(200, 30));
+
+		staffMember.setMaximumSize(new Dimension(200, 30));
+
+		this.setLayout(new BoxLayout(this, 1));
 
 		success.setVisible(false);
 		failure.setVisible(false);
-		JLabel stLabel = new JLabel ("Start time: ");
-		JLabel endLabel = new JLabel ("End time: ");
-		JLabel yrLabel = new JLabel ("Year: ");
-		JLabel mLabel = new JLabel ("Month: ");
-		JLabel dLabel = new JLabel ("Day: ");
-		JLabel smLabel = new JLabel ("Staff Member: ");
-		
-	
+		JLabel stLabel = new JLabel("Start time: ");
+		JLabel endLabel = new JLabel("End time: ");
+		JLabel yrLabel = new JLabel("Year: ");
+		JLabel mLabel = new JLabel("Month: ");
+		JLabel dLabel = new JLabel("Day: ");
+		JLabel smLabel = new JLabel("Staff Member: ");
+
 		this.add(stLabel);
 		this.add(startTimesComboBox);
 		this.add(endLabel);
@@ -131,15 +148,15 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 		this.add(staffMember);
 		this.add(success);
 		this.add(failure);
-		
+
 		JButton makeBooking = new JButton("Book Holiday");
 		makeBooking.addActionListener(new BookingHolidayHandler(this));
 		this.add(makeBooking);
 
-
 	}
-	//fill the times of day 
-	public void populateTimesOfDay(){
+
+	// fill the times of day
+	public void populateTimesOfDay() {
 		java.sql.Time startTime = new java.sql.Time(9, 0, 0);
 		java.sql.Time endTime = new java.sql.Time(17, 0, 0);
 
@@ -147,114 +164,139 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(startTime);
 		while (cal.getTime().before(endTime)) {
-		    cal.add(Calendar.MINUTE, 20);
-		    times.add(new java.sql.Time(cal.getTimeInMillis()));
+			cal.add(Calendar.MINUTE, 20);
+			times.add(new java.sql.Time(cal.getTimeInMillis()));
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		
+
 		for (java.sql.Time time : times) {
-		    timesString.add(sdf.format(time));
+			timesString.add(sdf.format(time));
 		}
-		
-		
+
 	}
+
 	@Override
-	//when the combo boxes are changed perform this
+	// when the combo boxes are changed perform this
 	public void actionPerformed(ActionEvent e) {
-		JComboBox combo = (JComboBox)e.getSource();
-		//get the current year and month from the combo boxes.
-		if (combo.equals(yearComboBox)){
-        	String selectedYear = (String)  combo.getSelectedItem();
-        	currentYear = Integer.parseInt(selectedYear);
-        	currentMonth = Integer.parseInt((String) monthComboBox.getSelectedItem());
-		}
-		else if (combo.equals(monthComboBox)) {
+		JComboBox combo = (JComboBox) e.getSource();
+		// get the current year and month from the combo boxes.
+		if (combo.equals(yearComboBox)) {
+			String selectedYear = (String) combo.getSelectedItem();
+			currentYear = Integer.parseInt(selectedYear);
+			currentMonth = Integer.parseInt((String) monthComboBox
+					.getSelectedItem());
+		} else if (combo.equals(monthComboBox)) {
 			String selectedMonth = (String) combo.getSelectedItem();
-	        currentMonth = Integer.parseInt(selectedMonth);
-		} else if (combo.equals(startTimesComboBox)){
+			currentMonth = Integer.parseInt(selectedMonth);
+		} else if (combo.equals(startTimesComboBox)) {
 			endTimesComboBox.removeAllItems();
-			for (int i = startTimesComboBox.getSelectedIndex() +1;i<startTimesComboBox.getItemCount();i++){
+			for (int i = startTimesComboBox.getSelectedIndex() + 1; i < startTimesComboBox
+					.getItemCount(); i++) {
 				endTimesComboBox.addItem(startTimesComboBox.getItemAt(i));
 			}
-			currentMonth = Integer.parseInt((String) monthComboBox.getSelectedItem());
+			currentMonth = Integer.parseInt((String) monthComboBox
+					.getSelectedItem());
 		} else {
-			currentMonth = Integer.parseInt((String) monthComboBox.getSelectedItem());
+			currentMonth = Integer.parseInt((String) monthComboBox
+					.getSelectedItem());
 		}
-		//switch to determine which months have how many days.
-			switch (currentMonth) {
-		        case 1:
-		        case 3:
-		        case 5:
-		        case 7:
-		        case 8:
-		        case 10:
-		        case 12:
-		            daysInMonth = 31;
-		            break;
-		        case 4:
-		        case 6:
-		        case 9:
-		        case 11:
-		            daysInMonth = 30;
-		            break;
-		        case 2:
-		            if (((currentYear % 4 == 0) && 
-		                 !(currentYear % 100 == 0))
-		                 || (currentYear % 400 == 0))
-		                daysInMonth = 29;
-		            else
-		                daysInMonth = 28;
-		            break;
-		        default:
-		            daysInMonth=1;
-		            break;
+		// switch to determine which months have how many days.
+		switch (currentMonth) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			daysInMonth = 31;
+			break;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			daysInMonth = 30;
+			break;
+		case 2:
+			if (((currentYear % 4 == 0) && !(currentYear % 100 == 0))
+					|| (currentYear % 400 == 0))
+				daysInMonth = 29;
+			else
+				daysInMonth = 28;
+			break;
+		default:
+			daysInMonth = 1;
+			break;
+		}
+		dayComboBox.removeAllItems();
+		System.out.println(currentMonth);
+		for (int i = 1; i <= daysInMonth; i++) {
+			String x = Integer.toString(i);
+			Date dt = new Date(currentYear, currentMonth + 1, i);
+			int day = dt.getDay();
+			String dayName;
+			switch (day) {
+			case 0:
+				dayName = " Sunday";
+				break;
+			case 1:
+				dayName = " Monday";
+				break;
+			case 2:
+				dayName = " Tuesday";
+				break;
+			case 3:
+				dayName = " Wednesday";
+				break;
+			case 4:
+				dayName = " Thursday";
+				break;
+			case 5:
+				dayName = " Friday";
+				break;
+			case 6:
+				dayName = " Saturday";
+				break;
+			default:
+				dayName = " Fail";
+				break;
 			}
-			dayComboBox.removeAllItems();
-			System.out.println(currentMonth);
-			for (int i = 1; i <= daysInMonth;i++){
-				String x = Integer.toString(i);
-				Date dt = new Date(currentYear, currentMonth+1, i);
-				int day = dt.getDay();
-				String dayName;
-				switch (day){
-					case 0: dayName = " Sunday";break;
-					case 1: dayName = " Monday";break;
-					case 2: dayName = " Tuesday";break;
-					case 3: dayName = " Wednesday";break;
-					case 4: dayName = " Thursday";break;
-					case 5: dayName = " Friday";break;
-					case 6: dayName = " Saturday";break;
-					default: dayName = " Fail";break;
-				}
 
-				dayComboBox.addItem(x + dayName);
-			}
+			dayComboBox.addItem(x + dayName);
+		}
 
-		
 	}
-	public String getYear(){
+
+	public String getYear() {
 		return (String) yearComboBox.getSelectedItem();
 	}
-	public String getMonth(){
+
+	public String getMonth() {
 		return (String) monthComboBox.getSelectedItem();
 	}
-	public String getDay(){
+
+	public String getDay() {
 		return (String) dayComboBox.getSelectedItem();
 	}
-	public String getStartTime(){
+
+	public String getStartTime() {
 		System.out.println(startTimesComboBox.getSelectedItem());
 		return (String) startTimesComboBox.getSelectedItem();
 	}
-	public String getEndTime(){
+
+	public String getEndTime() {
 		return (String) endTimesComboBox.getSelectedItem();
 	}
-	public String getStaff(){
+
+	public String getStaff() {
 		return (String) staffMember.getSelectedItem();
 	}
-	public JLabel getSuccess(){
+
+	public JLabel getSuccess() {
 		return success;
 	}
-	public JLabel getFailure(){
+
+	public JLabel getFailure() {
 		return failure;
 	}
 }

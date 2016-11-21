@@ -89,34 +89,39 @@ public class Database {
 		this.table = table;
 		return (Appointment) excQuery(query);
 	}
-	//get an object with all the appointments that match param
+
+	// get an object with all the appointments that match param
 	public Object selectAppointment(String item, String table, String param) {
 		query = "SELECT " + item + " FROM " + table + " WHERE " + param;
 		this.table = table;
 		System.out.println(query);
 		return excQuery(query);
 	}
-	//add a patient to the db, takina patient appointment 
+
+	// add a patient to the db, takina patient appointment
 	public void addPatient(Patient patient) {
 		selectQ = false;
 		query = "INSERT INTO patients VALUES (" + patient.toSQLString() + ")";
 		excQuery(query);
 	}
-	//Delete patient removes a patient from the db
+
+	// Delete patient removes a patient from the db
 	public void deletePatient(Patient patient) {
 		selectQ = false;
 		query = "DELETE FROM patients WHERE patient_id="
 				+ patient.getPatientID();
 		excQuery(query);
 	}
-	//add an appointment to the db
+
+	// add an appointment to the db
 	public void bookDentistAppointment(String booking, String table) {
 		selectQ = false;
 		query = "INSERT INTO " + table + " VALUES (" + booking + ")";
 		// System.out.println(query);
 		excQuery(query);
 	}
-	//creating the db connection 
+
+	// creating the db connection
 	public Object excQuery(String query) {
 		Object result = null;
 		try {
@@ -128,7 +133,7 @@ public class Database {
 
 			// create the java statement
 			Statement st = conn.createStatement();
-			//if it is a select statement
+			// if it is a select statement
 			if (selectQ) {
 				// execute the query, and get a java resultset
 				ResultSet rs = st.executeQuery(query);
@@ -154,8 +159,8 @@ public class Database {
 		}
 		return result;
 	}
-	
-	//extract patient information from resultset
+
+	// extract patient information from resultset
 	public Patient getPatientResults(ResultSet r) throws SQLException {
 		Patient allRes = new Patient();
 		allRes.setPatientID(r.getInt("patient_id"));
@@ -173,7 +178,7 @@ public class Database {
 		return allRes;
 	}
 
-	//return array list of appointments from the appointment results
+	// return array list of appointments from the appointment results
 	public ArrayList<Appointment> getAppointmentResults(ResultSet r)
 			throws SQLException {
 		ArrayList<Appointment> apps = new ArrayList<Appointment>();
@@ -186,12 +191,13 @@ public class Database {
 		} while (r.next());
 		return apps;
 	}
-	//get total number of something form result set
+
+	// get total number of something form result set
 	public int getCount(ResultSet r) throws SQLException {
 		return r.getInt("total");
 	}
-	
-	//format a date using a start date and an amount of days to add
+
+	// format a date using a start date and an amount of days to add
 	public String dateFormatter(Date weekCommencing, int daysToAdd) {
 		Date newDate = new Date(weekCommencing.getYear(),
 				weekCommencing.getMonth(), weekCommencing.getDate(),
@@ -213,8 +219,8 @@ public class Database {
 
 		return sqlFormatter(newerDate);
 	}
-	
-	//format a date for sql
+
+	// format a date for sql
 	public String sqlFormatter(Date d) {
 		String x = "'" + (d.getYear() + 1900) + "-" + (d.getMonth() + 1) + "-"
 				+ d.getDate() + " " + d.getHours() + ":" + d.getMinutes()

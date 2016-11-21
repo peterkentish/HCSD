@@ -46,7 +46,8 @@ public class GenerateReceipt {
 		this.ai = pan;
 	}
 
-	public void writeFile(String price, String fname, String sname, ArrayList<String> services,String comment) throws IOException {
+	public void writeFile(String price, String fname, String sname,
+			ArrayList<String> services, String comment) throws IOException {
 		BufferedWriter writer = null;
 		try {
 			// create a temporary file
@@ -77,15 +78,18 @@ public class GenerateReceipt {
 			writer.write("\u00a3" + price);
 			writer.newLine();
 			writer.write("Your Price: ");
-			
-			//get the patients details to see how many check-ups,hygienists and repair  
+
+			// get the patients details to see how many check-ups,hygienists and
+			// repair
 			Patient pat = ((Patient) db.selectPatient("*", "patients",
 					"first_name='" + fname + "'and last_name='" + sname + "'"));
 			double cost = Double.parseDouble(price);
-			//obtain amount of checkups left on plan and decrement if service used
+			// obtain amount of checkups left on plan and decrement if service
+			// used
 			int checks = pat.getChecks();
 			System.out.println(checks);
-			//decrease price by cost of each service available left from health care plan
+			// decrease price by cost of each service available left from health
+			// care plan
 			for (int i = 0; i < services.size(); i++) {
 				System.out.println(services.get(i));
 				if (checks > 0) {
@@ -95,7 +99,8 @@ public class GenerateReceipt {
 					}
 				}
 			}
-			//obtain amount of hygienes left on plan and decrement if service used
+			// obtain amount of hygienes left on plan and decrement if service
+			// used
 			int hyg = pat.getHyg();
 			for (int x = 0; x < services.size(); x++) {
 				if (hyg > 0) {
@@ -107,7 +112,8 @@ public class GenerateReceipt {
 
 				}
 			}
-			//obtain amount of repairs left on plan and decrement if service used
+			// obtain amount of repairs left on plan and decrement if service
+			// used
 			int repa = pat.getRepa();
 			for (int x = 0; x < services.size(); x++) {
 				if (repa > 0) {
@@ -121,7 +127,8 @@ public class GenerateReceipt {
 
 			for (int x = 0; x < services.size(); x++) {
 				if (repa > 0) {
-					if (services.get(x).equals(("White composite resin filling"))) {
+					if (services.get(x).equals(
+							("White composite resin filling"))) {
 						cost -= 150;
 						repa--;
 					}
@@ -141,8 +148,9 @@ public class GenerateReceipt {
 			writer.write("\u00a3" + cost + "0");
 			// update services left on database
 			db.updatePatient("patients",
-					"check_up ='" + checks + "', hygiene_visit ='" + hyg + "', repair ='" + repa + "'",
-					"first_name='" + fname + "'and last_name='" + sname + "'");
+					"check_up ='" + checks + "', hygiene_visit ='" + hyg
+							+ "', repair ='" + repa + "'", "first_name='"
+							+ fname + "'and last_name='" + sname + "'");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
