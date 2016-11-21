@@ -24,5 +24,4 @@ public class HygienistMain extends DefaultFrame {
 		JFrame x = new HygienistMain();
 		x.setVisible(true);
 	}
-
 }
