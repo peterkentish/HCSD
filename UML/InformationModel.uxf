@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>80</y>
+      <w>300</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Address
+--
+-houseNo: Integer
+-streetName: String
+-city: String
+-postcode: String
+--
++getHouseNo(): Integer
++getStreetName(): String
++getCity(): String
++getPostcode(): String
++setHouseNo(int houseNo): Integer
++setStreetName(String streetName): String
++setCity(String city): String
++setPostcode(String postcode): String
+#insert()
+#create()
+#delete()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>430</y>
+      <w>290</w>
+      <h>450</h>
+    </coordinates>
+    <panel_attributes>Patient
+--
+-patientID: Integer
+-title: String
+-firstName: String
+-lastName: String
+-birthDate: String
+-contactNo: String
+-healthCare: String
+--
++getRegisterPatient(): Secretary
++getPatientID(): Integer
++getTitle(): String
++getFirstName(): String
++getLastName():String
++getBirthDate(): String
++getContactNo():String
++getHealthCare(): String
++getAddress(): Address
++setPatientID(Integer patientID): Integer
++setTitle(String title): String
++setFirstName(String firstName): String
++setLastName(String lastName): String
++setBirthDate(String birthDate): String
++setContactNo(String contactNo): String
++setHealthCare(String healthCare): String
+#insert()
+#create()
+#delete()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>610</y>
+      <w>280</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>Appointment
+--
+-startTime: String
+-endTime: String
+--
++getStartTime(): String
++getEndTime(): String
++setStartTime(String startTime): String
++setEndTime(String endTime): String
++getPatientID(): Patient
++getFirstName(): Patient
++getLastName(): Patient
++getPostcode(): Patient
+#insert()
+#create()
+#delete()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>60</y>
+      <w>280</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Calendar
+--
+-startWeek: String
+-time: String
+-day: String
+--
++getStartWeek(): String
++getTime(): String
++getDay(): String
++setStartWeek(String startWeek): String
++setTime(String time): String
++setDay(String day): String
++getStaffMember(): Staff 
++getAppointmentSlot(): Booking
+#insert()
+#create()
+#delete()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>320</y>
+      <w>320</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Staff
+--
+-staffMember: String
+--
++getStaffMember(): String
++setStaffMember(String staffMember): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>390</y>
+      <w>370</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Booking
+--
+-appointmentSlot: String
+--
++getAppoinmentSlot(): String
++getStartTime(): Appointment
++getEndTime(): Appointment
++getTime(): Calendar
++getDay(): Calendar
++setAppointmentSlot(String appoinmentSlot): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>0</y>
+      <w>380</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>Secretary
+--
+-dentistCal: String
+-hygieneCal: String
+-registerPatient: String
+-bookAppointment: String
+-holiday: String
+--
++getDentistCal(): String
++getHygieneCal(): String
++getRegisterPatient(): String
++getBookAppoinment(): String
++setDentistCal(String dentistCal): String
++setHygieneCal(String hygieneCal): String
++setRegisterPatient(String registerPatient): String
++setBookAppointment(String bookAppoinment): String
++setHoliday(String holiday): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>340</y>
+      <w>100</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1 domicile
+
+m2=1..* holder
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>720</y>
+      <w>280</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1 patient
+m2=0..* appointments
+</panel_attributes>
+    <additional_attributes>10.0;20.0;260.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>530</y>
+      <w>150</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..* booking slots
+m2=1 appointment
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>320</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1 booking
+m2=1..* calendars
+</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1070</x>
+      <y>480</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Dentist
+--
+--
++getDentistCal(): Secretary</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>470</y>
+      <w>200</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Hygienist
+--
+--
++getHygieneCal(): Secretary</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>660</y>
+      <w>330</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>After Appointment
+--
+-patientVisit: Boolean
+-payment: Real
+--
++getPatientVisit(): Boolean
++setPatientVisit(Boolean patientVisit): Boolean
++getPatientID(): Patient
++getPatientFirstName(): Patient
++getPatientLastName(): Patient
++getStaffMember(): Staff
++getHealthCare(): Patient
++getPayment: Real
++setPayment(Real payment): Real
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>250</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1 secretary
+m2=1..3 members of staff
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>930</x>
+      <y>400</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1 hygienist
+m2=1..3 members of staff
+</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>400</y>
+      <w>170</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1 dentist
+m2=1..3 members of staff
+</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1150</x>
+      <y>530</y>
+      <w>130</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..* after forms
+m2=1 dentist
+</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>930</x>
+      <y>530</y>
+      <w>130</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..* after forms
+m2=1 hygienist
+</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>60</y>
+      <w>250</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..* calendars
+m2=1 secretary
+</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1000</x>
+      <y>920</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Refuse to allow 
+the payment to go 
+below 0.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1030</x>
+      <y>850</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
