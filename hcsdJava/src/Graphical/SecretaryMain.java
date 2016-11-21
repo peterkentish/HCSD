@@ -8,6 +8,12 @@ import javax.swing.JTabbedPane;
 
 import Database.Database;
 
+/*
+ * secretary window where the user can select tabs for dentist or hygiene week schedule. Also tabs to book appointment
+ * and set holidays so unable to book appointment for specific date.
+ * tabs linked to relevant panel
+ */
+
 public class SecretaryMain extends DefaultFrame{
 	
 	public SecretaryMain(){
