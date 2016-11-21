@@ -34,7 +34,6 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	private String postcode;
 	private String contactNo;
 	private String healthCare;
-	private BigDecimal amountPaid;
 	JLabel success = new JLabel("Registration Successful");
 	JLabel failure = new JLabel ("Registration Failed, please check user details");
 	public RegistrationInformationPanel(){
@@ -118,7 +117,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 		postcode = this.getPostcodeText();
 		contactNo = this.getContactNoText();
 		healthCare = this.getHealthcareComboBox();
-		amountPaid = this.getAmountPaid();
+		
 		checks = this.getChecks();
 		hyg = this.getHyg();
 		repa = this.getRepa();
@@ -156,7 +155,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	public String getContactNoText() {
 		return contactNoText.getText();
 	}
-	
+	//returning how many check ups, hygienists and repairs is included in the plan
 	public int getChecks(){
 		if (!getHealthcareComboBox().equals("No Plan")){
 			return 2;
@@ -187,7 +186,7 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	}
 	
 	
-	
+	//getters and setters
 	public JLabel getSuccess() {
 		return success;
 	}
@@ -200,20 +199,6 @@ public class RegistrationInformationPanel extends JPanel implements ActionListen
 	public void setFailure(JLabel failure) {
 		this.failure = failure;
 	}
-	public BigDecimal getAmountPaid() {
-		BigDecimal bd = null;
-		if (getHealthcareComboBox().equals("NHS Free Plan")){
-			 bd = new BigDecimal(600);
-			
-		}else if(getHealthcareComboBox().equals("Maintenance Plan")){
-			bd = new BigDecimal(180);
-		}else if(getHealthcareComboBox().equals("Dental Repair Plan")){
-			 bd = new BigDecimal(400);
-		}else if(getHealthcareComboBox().equals("Oral Health Plan ")){
-			 bd = new BigDecimal(400);
-		}
-		
-		return bd;
-	}
+
 
 }
