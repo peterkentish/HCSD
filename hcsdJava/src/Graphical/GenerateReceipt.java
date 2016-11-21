@@ -56,6 +56,7 @@ public class GenerateReceipt {
 			writer.write(name);
 			writer.newLine();
 			writer.newLine();
+			writer.write("Comments: ");
 			writer.write(comment);
 			writer.newLine();
 			writer.newLine();
