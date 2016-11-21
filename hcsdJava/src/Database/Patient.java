@@ -1,14 +1,16 @@
 package Database;
 
-import java.math.BigDecimal;
-
+/*
+ * Creates a a patient object with a set of attributes that are also represented 
+ * in the database. It is a set of class variables followed by getters and setters.
+ */
 public class Patient {
 	
 	private int patientID;
 	private String title, firstName,lastName,birthDate, streetAddress,postcode,contactNo,healthCare;
 	private int checks, hyg, repa;
 	public Patient() {
-		// TODO Auto-generated constructor stub
+		//empty constructor
 	}
 		
 	
@@ -21,7 +23,6 @@ public class Patient {
 		this.postcode = postcode;
 		this.contactNo = contactNo;
 		this.healthCare = healthcare;
-		
 		this.checks = checks;
 		this.hyg = hyg;
 		this.repa = repa;

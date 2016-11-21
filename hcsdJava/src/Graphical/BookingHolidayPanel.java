@@ -21,8 +21,9 @@ import javax.swing.JTextField;
 
 import Database.Database;
 import Database.Patient;
-
+//the panel that is used by the secretary to book holidays for the partners
 public class BookingHolidayPanel extends JPanel implements ActionListener {
+	//start variables
 	ArrayList<String> timesString = new ArrayList<String>();
 	List<java.sql.Time> times = new ArrayList<>();
 	JComboBox<String> startTimesComboBox = new JComboBox<>();
@@ -31,16 +32,13 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 	
 	private int currentMonth;
 	private int currentYear;
-	
-	private Database db = new Database();
-	
 	private int daysInMonth = 31;
 	private JComboBox<String> dayComboBox = new JComboBox<String>();
 	private JComboBox<String> yearComboBox = new JComboBox<String>();
 	private JComboBox<String> monthComboBox = new JComboBox<String>();
 	JLabel success = new JLabel("Booking Successful!!");
 	JLabel failure = new JLabel("Booking Failed, appointment time taken");
-	
+	//constructor that 
 	public BookingHolidayPanel(){
 		populateTimesOfDay();
 		yearComboBox.setMaximumSize(new Dimension(200,30));

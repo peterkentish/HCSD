@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import Database.Database;
 import Database.Patient;
 /*
- * this class allows the secretary to book an appointment 
+ * A GUI panel where the secretary books an appointment for a patient
  */
 public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	ArrayList<String> timesString = new ArrayList<String>();
@@ -51,6 +51,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 	JLabel success = new JLabel("Booking Successful!!");
 	JLabel failure = new JLabel("Booking Failed, appointment time taken");
 	
+	//Constructor that populates the page with the relevant listeners
 	public BookingAppointmentPanel(){
 		populateTimesOfDay();
 		firstNameText= new JTextField(20);
@@ -69,6 +70,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		staffMember.addItem("Dentist");
 		staffMember.addItem("Hygienist");
 		
+		// A loop to add the weekday name to the name select books
 		for (int i = 1; i <= daysInMonth;i++){
 			String x = Integer.toString(i);
 			Date dt = new Date(currentYear, currentMonth, i);
@@ -88,12 +90,13 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 			dayComboBox.addItem(x+dayName);
 		}
 	
+		//populate months
 		for (int i = 1; i < 13;i++){
 			String x = Integer.toString(i);
 			monthComboBox.addItem(x);
 		}
 		
-		
+		//populate start and end times box
 		for (int i=0;i<times.size();i++){
 			startTimesComboBox.addItem(timesString.get(i));
 			if(i>=1){
@@ -109,7 +112,6 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		String todaysYear = Integer.toString(yearToday);
 		String todaysMonth = Integer.toString(monthToday);
 		String todaysDay = Integer.toString(dayToday);
-		
 		yearComboBox.setSelectedItem(todaysYear);
 		monthComboBox.setSelectedItem(todaysMonth);
 		dayComboBox.setSelectedItem(todaysDay);
@@ -122,10 +124,10 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		postcodeText.setMaximumSize(textDim);
 		startTimesComboBox.setMaximumSize(new Dimension(200,30));
 		endTimesComboBox.setMaximumSize(new Dimension(200,30));
-		
 		staffMember.setMaximumSize(new Dimension(200,30));
-		
 		this.setLayout(new BoxLayout(this,1));
+		
+		
 		JLabel firstNameLabel = new JLabel("First Name: ");
 		JLabel lastNameLabel = new JLabel("Surname: ");
 		JLabel birthDateLabel = new JLabel("Date of Birth: ");
@@ -137,6 +139,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		JLabel dLabel = new JLabel ("Day: ");
 		JLabel smLabel = new JLabel ("Staff Member: ");
 		
+		//set invisible buttons that turn visible when registration state updated 
 		success.setVisible(false);
 		failure.setVisible(false);
 		
@@ -154,7 +157,6 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		this.add(postcodeLabel);
 		this.add(postcodeText);
 		
-		
 		this.add(stLabel);
 		this.add(startTimesComboBox);
 		this.add(endLabel);
@@ -169,13 +171,13 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		this.add(staffMember);
 		this.add(success);
 		this.add(failure);
-		
 		JButton makeBooking = new JButton("Book Appointment");
 		makeBooking.addActionListener(new BookingHandler(this));
 		this.add(makeBooking);
 
 
 	}
+	//Fill the times of day, making sure end time is always after start time
 	public void populateTimesOfDay(){
 		java.sql.Time startTime = new java.sql.Time(9, 0, 0);
 		java.sql.Time endTime = new java.sql.Time(17, 0, 0);
@@ -195,6 +197,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		
 		
 	}
+	//every time a combo box is touched this is activated to make sure things are correct
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		idLabel.setVisible(true);
@@ -247,7 +250,7 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 		            break;
 			}
 			dayComboBox.removeAllItems();
-			System.out.println(currentMonth);
+			//update which number day it is if the month changes
 			for (int i = 1; i <= daysInMonth;i++){
 				String x = Integer.toString(i);
 				Date dt = new Date(currentYear, currentMonth+1, i);
@@ -266,10 +269,8 @@ public class BookingAppointmentPanel extends JPanel implements ActionListener {
 
 				dayComboBox.addItem(x + dayName);
 			}
-
-		
 	}
-	
+	//getters for the combo box items
 	public String getFirstNameText() {
 		return firstNameText.getText();
 	}
