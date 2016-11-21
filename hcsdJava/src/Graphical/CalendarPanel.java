@@ -1,5 +1,11 @@
-package Graphical;
+/*
+ * A calendar which uses graphics 2D to produce a table, with 6 columns.
+ * the first column being the time in 20 mintue intervals, the rest being
+ * the days of the week from monday through friday. It then populates these
+ * with the data from the database for each day and time segment.  
+ */
 
+package Graphical;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -30,12 +36,11 @@ public class CalendarPanel extends JPanel implements ActionListener {
 	String[] dayOfWeek = new String[5];
 	List<java.sql.Time> times = new ArrayList<>();
 	ArrayList<String> timesString = new ArrayList<String>();
-	
 	String staff;
 	Date weekStart;
 	
 	Database db = new Database();
-	
+	//Get the start of the week, using the most recent monday as the start 
 	public void getStartOfWeek(int i){
 		Calendar c = Calendar.getInstance();
 		c.setFirstDayOfWeek(Calendar.MONDAY);
@@ -49,6 +54,7 @@ public class CalendarPanel extends JPanel implements ActionListener {
 		}
 		int monthInt = weekStart.getMonth();
 	}
+	//create the times in 20 minute intervals, only allow end time after start time
 	public void populateTimesOfDay(){
 		java.sql.Time startTime = new java.sql.Time(9, 0, 0);
 		java.sql.Time endTime = new java.sql.Time(17, 0, 0);
@@ -71,6 +77,7 @@ public class CalendarPanel extends JPanel implements ActionListener {
 		dayOfWeek[3]="Thursday";
 		dayOfWeek[4]="Friday";
 	}
+	//constructor that gets the appointments from the db and adds them to arraylist apps.
 	public CalendarPanel(String staffS){
 		this.staff = staffS;
 		setBackground(Color.WHITE);	
@@ -88,13 +95,16 @@ public class CalendarPanel extends JPanel implements ActionListener {
 		this.add(next);
 		next.setBounds(200, 100, 50, 50);
 	}
+	// the big guns where the calendar is drawn
 	public void paintComponent(Graphics graphics){
 		super.paintComponent(graphics);
 		Graphics2D g = (Graphics2D) graphics;
 		Font mainFont = new Font("Century Gothic", 0, 20);
 		Font titleFont = new Font("Century Gothic", 0, 28);
 		apps = (ArrayList<Appointment>) db.getAppointmentsWeek(weekStart, staff);
-		sqlFormatterToday(weekStart);
+		
+		
+		
 		g.setFont(titleFont);
 		g.drawString("Week Commencing "+weekStart.toString().substring(4, 10), 400, 25);
 		
