@@ -38,7 +38,7 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 	private JComboBox<String> monthComboBox = new JComboBox<String>();
 	JLabel success = new JLabel("Booking Successful!!");
 	JLabel failure = new JLabel("Booking Failed, appointment time taken");
-	//constructor that 
+	//constructor that initialises the combo boxes with the relevant infomation for that month
 	public BookingHolidayPanel(){
 		populateTimesOfDay();
 		yearComboBox.setMaximumSize(new Dimension(200,30));
@@ -52,11 +52,11 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 		staffMember.addItem("Dentist");
 		staffMember.addItem("Hygienist");
 		
+		//for each day get the correct day name in the currently selected month
 		for (int i = 1; i <= daysInMonth;i++){
 			String x = Integer.toString(i);
 			Date dt = new Date(currentYear, currentMonth, i);
 			int day = dt.getDay();
-			
 			String dayName;
 			switch (day+1){
 				case 7: dayName = " Sunday";break;
@@ -75,14 +75,16 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 			String x = Integer.toString(i);
 			monthComboBox.addItem(x);
 		}
-		
-		
+		//for the times, add the start and end times
 		for (int i=0;i<times.size();i++){
 			startTimesComboBox.addItem(timesString.get(i));
 			if(i>=1){
 				endTimesComboBox.addItem(timesString.get(i));
 			}
 		}
+		
+		
+		// the following is gui setup 
 		startTimesComboBox.addActionListener(this);
 		endTimesComboBox.addActionListener(this);
 		Date todaysDate = new Date();
@@ -136,6 +138,7 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 
 
 	}
+	//fill the times of day 
 	public void populateTimesOfDay(){
 		java.sql.Time startTime = new java.sql.Time(9, 0, 0);
 		java.sql.Time endTime = new java.sql.Time(17, 0, 0);
@@ -156,6 +159,7 @@ public class BookingHolidayPanel extends JPanel implements ActionListener {
 		
 	}
 	@Override
+	//when the combo boxes are changed perform this
 	public void actionPerformed(ActionEvent e) {
 		JComboBox combo = (JComboBox)e.getSource();
 		//get the current year and month from the combo boxes.
